@@ -69,11 +69,13 @@ export default function NavBar(props: {navState: NavState, setNavState: (state: 
     }, [props.setForBlind, props.forBlind]);
 
     return <nav className={styles.nav}>
-        <LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive} isActive={props.navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText>
-        <Vr/>
-        <LogoAndText normalSvg={PersonNormal} activeSvg={PersonActive} isActive={props.navState === NavState.Profile} onClick={setNavProfile}>Личный кабинет</LogoAndText>
-        <Vr/>
-        <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive} isActive={props.navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>
+        <div className={styles.align_start}>
+            <LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive} isActive={props.navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText>
+            <Vr/>
+            <LogoAndText normalSvg={PersonNormal} activeSvg={PersonActive} isActive={props.navState === NavState.Profile} onClick={setNavProfile}>Личный кабинет</LogoAndText>
+            <Vr/>
+            <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive} isActive={props.navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>
+        </div>
         <div className={styles.align_end}>
             <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}>Для слабовидящих</LogoAndText>
             <Vr/>

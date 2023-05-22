@@ -2,8 +2,8 @@
     display: inline-block;
     align-self: stretch;
     width: 2px;
-    height: 2.5vh;
-    margin-top: 0.8vh;
+    height: 75%;
+    margin-top: 7px;
     background-color: var(--text-inactive);
     margin-right: 15px;
     margin-left: 15px;
@@ -48,4 +48,9 @@
     align-items: flex-end;
     justify-content: flex-end;
     margin-left: auto;
+}
+
+.align_start {
+    display: flex;
+    align-items: start;
 }
