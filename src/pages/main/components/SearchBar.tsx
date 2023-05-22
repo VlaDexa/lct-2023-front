@@ -1,6 +1,6 @@
-import styles from "./MainPage.Banner.SearchBar.module.css"
-import {ReactComponent as Lupa} from "./assets/icons/lupa.svg";
-import {ReactComponent as Settings} from "./assets/icons/settings.svg";
+import styles from "./SearchBar.module.css"
+import {ReactComponent as Lupa} from "../../../assets/icons/lupa.svg";
+import {ReactComponent as Settings} from "../../../assets/icons/settings.svg";
 
 
 export default function SearchBar() {

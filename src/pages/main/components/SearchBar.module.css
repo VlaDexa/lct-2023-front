@@ -17,7 +17,7 @@
 }
 
 .search_button {
-    transform: translateX(-55px);
+    transform: translateX(-53.5px);
     background-color: var(--text-active);
     border: 0;
     border-radius: 10px;
@@ -26,7 +26,6 @@
     padding: 0;
     display: flex;
 }
-
 
 .lupa {
     margin: 8px 10px;

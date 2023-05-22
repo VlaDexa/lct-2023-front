@@ -7,6 +7,7 @@
     line-height: 48px;
     height: 365px;
     z-index: 0;
+    padding-left: 138px;
 }
 
 .banner > * {
@@ -48,8 +49,7 @@
 }
 
 .banner_flavour_text {
-    margin-top: 5vh;
-    margin-left: 5vw;
+    margin-top: 58px;
 }
 
 .babushka {
@@ -61,12 +61,20 @@
     z-index: 2;
 }
 
+.starperi {
+    position: fixed;
+    right: 0;
+    margin-top: -44px;
+    z-index: 2;
+}
+
 .how_does_it_work {
     font-size: var(--normal-font);
     line-height: 22px;
     text-decoration-line: underline;
     color: white;
     font-weight: 400;
-    margin-top: 7%;
-    margin-left: 4%;
+    margin-top: 46px;
+    margin-left: 19px;
+    margin-bottom: 0;
 }

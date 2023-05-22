@@ -1,4 +1,4 @@
-import Banner from "./MainPage.Banner";
+import Banner from "./components/Banner";
 import styles from "./MainPage.module.css";
 import {useCallback, useState} from "react";
 

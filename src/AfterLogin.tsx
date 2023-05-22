@@ -1,7 +1,7 @@
 import {LoginInfo} from "./App";
 import NavBar, {NavState} from "./NavBar";
 import {useCallback, useState} from "react";
-import Main from "./MainPage";
+import Main from "./pages/main/MainPage";
 
 export default function AfterLogin(props: {user: LoginInfo}) {
     const [navState, setNavState] = useState(NavState.Main);

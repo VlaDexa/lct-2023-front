@@ -1,7 +1,8 @@
-import {ReactComponent as BannerThing} from "./assets/banner_thingy.svg"
+import {ReactComponent as BannerThing} from "../../../assets/banner_thingy.svg"
 import Babushka from "/scandinavian_babushka.png"
-import styles from "./MainPage.Banner.module.css"
-import SearchBar from "./MainPage.Banner.SearchBar";
+import Starperi from "/old_normal_sport_starperi.png"
+import styles from "./Banner.module.css"
+import SearchBar from "./SearchBar";
 
 export default function Banner() {
     return <div className={[styles.banner, styles.flex_row].join(" ")}>
@@ -12,6 +13,7 @@ export default function Banner() {
             <SearchBar/>
         </div>
         <BannerThing className={styles.banner_decoration}/>
-        <img className={styles.babushka} src={Babushka} alt={""}></img>
+        <img className={styles.babushka} src={Babushka} alt={""}/>
+        {/*<img className={styles.starperi} src={Starperi} alt={""}/>*/}
     </div>
 }
