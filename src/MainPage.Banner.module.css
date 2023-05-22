@@ -1,0 +1,65 @@
+.banner {
+    background-color: var(--text-active);
+    display: flex;
+    color: white;
+    font-size: var(--big-banner-font);
+    font-weight: 700;
+    line-height: 48px;
+    height: 365px;
+}
+
+.banner_decoration {
+    position: fixed;
+    right: 0;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_row > p {
+    margin: 0;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.inverse_color_text_upper {
+    background-color: white;
+    color: var(--text-active);
+    border: 1px solid #FFFFFF;
+    border-radius: 10px 10px 0 10px;
+}
+
+.inverse_color_text_lower {
+    background-color: white;
+    color: var(--text-active);
+    border: 1px solid #FFFFFF;
+    border-radius: 0 10px 10px 10px;
+}
+
+.banner_flavour_text {
+    margin-top: 5vh;
+    margin-left: 5vw;
+}
+
+.babushka {
+    position: fixed;
+    width: 473px;
+    height: 343px;
+    right: 50px;
+    margin-top: 22px;
+}
+
+.how_does_it_work {
+    font-size: var(--normal-font);
+    line-height: 22px;
+    text-decoration-line: underline;
+    color: white;
+    font-weight: 400;
+    margin-top: 7%;
+    margin-left: 4%;
+}

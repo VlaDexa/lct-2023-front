@@ -1,0 +1,20 @@
+:root {
+    --text-inactive: #151516;
+    --text-active: #006739;
+    --normal-font: 16px;
+    --big-banner-font: 40px;
+    --placeholder-color: #494949;
+}
+
+:root {
+    font-family: 'Golos Text', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--normal-font);
+    line-height: 22px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

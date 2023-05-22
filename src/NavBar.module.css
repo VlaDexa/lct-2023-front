@@ -1,0 +1,51 @@
+.vr {
+    display: inline-block;
+    align-self: stretch;
+    width: 2px;
+    height: 2.5vh;
+    margin-top: 0.8vh;
+    background-color: var(--text-inactive);
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.nav {
+    display: flex;
+    flex-flow: row;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+
+.logo_and_text {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    transition: all 1s linear;
+}
+
+.logo_and_text p {
+    padding-left: 12px;
+    color: var(--text-inactive);
+    transition: all 1s linear;
+}
+
+.logo_and_text .logo {
+
+}
+
+.logo_and_text:hover {
+    text-decoration: underline;
+}
+
+.active {
+    color: var(--text-active) !important;
+}
+
+.align_end {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-left: auto;
+}
