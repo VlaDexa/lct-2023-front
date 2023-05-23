@@ -1,7 +1,28 @@
 import Banner from "./components/Banner";
 import {useEffect, useState} from "react";
 import styles from "./MainPage.module.css";
-import {useCallback, useState} from "react";
+import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
+import {Group} from "./components/GroupCard";
+
+type Filters = {
+    type: SelectedGroupType
+}
+
+function Group(props: {group: Group}) {
+    return <div>
+
+    </div>
+}
+
+function Groups(props: {groups: Group[]}) {
+    return <div>
+        {props.groups.map(el => <Group key={el.id} group={el}/>)}
+    </div>
+}
+
+async function getGroups(filters: Filters): Promise<Group[]> {
+    return [];
+}
 
 export default function Main() {
     const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
