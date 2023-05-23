@@ -2,9 +2,7 @@
     background-color: var(--text-active);
     display: flex;
     color: white;
-    font-size: var(--big-banner-font);
-    font-weight: 700;
-    line-height: 48px;
+
     height: 365px;
     z-index: 0;
     padding-left: 138px;
@@ -46,6 +44,12 @@
     color: var(--text-active);
     border: 1px solid #FFFFFF;
     border-radius: 0 10px 10px 10px;
+}
+
+.big_text {
+    font-size: var(--big-banner-font);
+    font-weight: 700;
+    line-height: 48px;
 }
 
 .banner_flavour_text {

@@ -6,7 +6,7 @@
     --placeholder-color: #494949;
 }
 
-:root {
+* {
     font-family: 'Golos Text', serif;
     font-style: normal;
     font-weight: 400;
