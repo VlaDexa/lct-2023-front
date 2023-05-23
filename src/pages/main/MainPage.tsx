@@ -1,19 +1,27 @@
 import Banner from "./components/Banner";
+import {useEffect, useState} from "react";
 import styles from "./MainPage.module.css";
 import {useCallback, useState} from "react";
 
 export default function Main() {
-    const [isOnline, setOnline] = useState(false);
-    const setOnlineTrue = useCallback(() => {setOnline(true)}, [setOnline]);
-    const setOnlineFalse = useCallback(() => {setOnline(false)}, [setOnline]);
+    const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
+    const [group, setGroups] = useState<Group[]>([]);
+    const [filters, setFilters] = useState<Filters>({
+        type: selectedType
+    });
+
+    useEffect(() => {
+        setFilters({
+            type: selectedType
+        });
+    }, [selectedType])
+
+    useEffect(() => {
+        getGroups(filters).then(setGroups);
+    }, [filters])
 
     return <div>
         <Banner/>
-        <div className={styles.picker}>
-            <div className={styles.online_picker}>
-                <div className={!isOnline ? styles.active : undefined} tabIndex={0} onClick={setOnlineFalse}>Очно</div>
-                <div className={isOnline ? styles.active : undefined} tabIndex={0} onClick={setOnlineTrue}>Онлайн</div>
-            </div>
-        </div>
+        <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType} className={styles.spacing_left}/>
     </div>
 }
