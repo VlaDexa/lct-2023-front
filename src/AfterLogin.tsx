@@ -7,9 +7,6 @@ export default function AfterLogin(props: {user: LoginInfo}) {
     const [navState, setNavState] = useState(NavState.Main);
     const [blind, setBlind] = useState(false);
 
-    const setNavCallback = useCallback(setNavState, [setNavState]);
-    const setBlindState = useCallback(setBlind, [setBlind]);
-
     let DisplayedPage;
 
     switch (navState) {
@@ -18,7 +15,7 @@ export default function AfterLogin(props: {user: LoginInfo}) {
     }
 
     return <div>
-        <NavBar navState={navState} setNavState={setNavCallback} forBlind={blind} setForBlind={setBlindState}></NavBar>
+        <NavBar navState={navState} setNavState={setNavState} forBlind={blind} setForBlind={setBlind}></NavBar>
         <main>
            {DisplayedPage}
         </main>
