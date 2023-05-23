@@ -7,19 +7,19 @@ import {ReactComponent as HomeNormal} from "./assets/icons/home/normal.svg";
 import {ReactComponent as HomeActive} from "./assets/icons/home/active.svg";
 import {ReactComponent as EyeNormal} from "./assets/icons/eye/normal.svg";
 import {ReactComponent as EyeActive} from "./assets/icons/eye/active.svg";
-import {FunctionComponent, SVGProps, useCallback, KeyboardEvent} from "react";
+import {FunctionComponent, SVGProps, useCallback, KeyboardEvent, useState, useEffect} from "react";
 import FontSizeChanger from "./FontSizeChanger";
+import {Link} from "react-router-dom";
 
 export enum NavState {
     Main,
     Profile,
-    Help
+    Help,
+    Other,
 }
 
 function Vr() {
-    return <div className={styles.vr}>
-
-    </div>
+    return <div className={styles.vr}></div>
 }
 
 function LogoAndText(props: {
@@ -51,18 +51,37 @@ export enum FontSize {
     Xxl
 }
 
-export default function NavBar(props: {navState: NavState, setNavState: (state: NavState) => void, forBlind: boolean, setForBlind: (blind: boolean) => void}) {
+export default function NavBar(props: {forBlind: boolean, setForBlind: (blind: boolean) => void}) {
+    function defineNavState(): NavState {
+        switch (document.location.pathname) {
+            case "/":
+                return NavState.Main;
+            case "/profile":
+                return NavState.Profile;
+            case "/help":
+                return NavState.Help;
+            default:
+                return NavState.Other;
+        }
+    }
+
+    const [navState, setNavState] = useState(defineNavState);
+
+    useEffect(() => {
+        setNavState(defineNavState);
+    }, [document.location.pathname])
+
     const setNavMain = useCallback(() =>  {
-        props.setNavState(NavState.Main);
-    }, [props.setNavState]);
+        setNavState(NavState.Main);
+    }, [setNavState]);
 
     const setNavProfile = useCallback(() => {
-        props.setNavState(NavState.Profile);
-    }, [props.setNavState]);
+        setNavState(NavState.Profile);
+    }, [setNavState]);
 
     const setNavHelp = useCallback(() => {
-        props.setNavState(NavState.Help);
-    }, [props.setNavState]);
+        setNavState(NavState.Help);
+    }, [setNavState]);
 
     const setForBlind = useCallback(() => {
         props.setForBlind(!props.forBlind)
@@ -70,11 +89,15 @@ export default function NavBar(props: {navState: NavState, setNavState: (state: 
 
     return <nav className={styles.nav}>
         <div className={styles.align_start}>
-            <LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive} isActive={props.navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText>
+            <Link to={"/"}><LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive} isActive={navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText></Link>
             <Vr/>
-            <LogoAndText normalSvg={PersonNormal} activeSvg={PersonActive} isActive={props.navState === NavState.Profile} onClick={setNavProfile}>Личный кабинет</LogoAndText>
+            <Link to={"/profile"}>
+                <LogoAndText normalSvg={PersonNormal} activeSvg={PersonActive} isActive={navState === NavState.Profile} onClick={setNavProfile}>Личный кабинет</LogoAndText>
+            </Link>
             <Vr/>
-            <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive} isActive={props.navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>
+            <Link to={"/help"}>
+                <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive} isActive={navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>
+            </Link>
         </div>
         <div className={styles.align_end}>
             <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}>Для слабовидящих</LogoAndText>
