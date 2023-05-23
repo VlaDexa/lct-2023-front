@@ -1,0 +1,126 @@
+.group_card {
+    background: #F6F6F6;
+    border: 2px solid var(--text-active);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview {
+    border-radius: 10px;
+    margin: 18px 18px 0;
+}
+
+.title {
+    font-weight: 700;
+    font-size: calc(var(--normal-font) * 2);
+    line-height: 38px;
+    margin-top: 24px;
+    color: var(--text-active);
+    margin-left: 28px;
+    margin-bottom: 0;
+
+    font-style: normal;
+}
+
+.tag_line {
+    display: flex;
+    flex-direction: row;
+    margin-left: 28px;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.tag {
+    background-color: var(--mint);
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+    font-weight: 400;
+    line-height: 19px;
+    padding: 4px 12px;
+}
+
+.index {
+    background-color: var(--mint);
+    border-radius: 10px;
+    font-weight: 700;
+    margin-left: 28px;
+    width: max-content;
+    padding: 7px 16.5px;
+}
+
+.address_place {
+    display: flex;
+    flex-direction: column;
+    margin-left: 28px;
+}
+
+.address_string {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.metro_string {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--text-active);
+    gap: 12px;
+}
+
+.date_place {
+    display: flex;
+    flex-direction: row;
+    margin-left: 28px;
+    align-items: center;
+    gap: 12px;
+}
+
+.dates {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    line-height: 22px;
+}
+
+.button_row {
+    display: flex;
+    flex-direction: row;
+    margin-left: 28px;
+    margin-bottom: 15px;
+    gap: 10px;
+    width: 100%;
+}
+
+.more_button {
+    border: 2px solid var(--text-active);
+    border-radius: 10px;
+    color: var(--text-active);
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    height: 48px;
+    width: 46%;
+}
+
+.signup_button {
+    border-radius: 10px;
+    border: 0;
+    color: white;
+    background-color: var(--text-active);
+    height: 48px;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    width: 46%;
+}

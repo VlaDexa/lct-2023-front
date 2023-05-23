@@ -1,3 +1,11 @@
 .spacing_left {
     margin-left: 138px;
 }
+
+.groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 138px;
+    margin-right: 138px;
+    gap: 20px
+}

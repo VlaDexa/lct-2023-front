@@ -9,18 +9,44 @@ type Filters = {
 }
 
 function Groups(props: {groups: Group[]}) {
-    return <div>
-        {props.groups.map(el => <GroupCard key={el.id} group={el}/>)}
+    return <div className={styles.groups}>
+        {props.groups.map((el, index) => <GroupCard key={el.id} group={el} index={index}/>)}
     </div>
 }
 
 async function getGroups(filters: Filters): Promise<Group[]> {
-    return [];
+    return [{
+        time: ["ПН 18:00-20:00"],
+        id: "1",
+        timeToWalk: 17,
+        metro: "Чертаново",
+        address: "Карельский бульвар, дом 20",
+        tags: [
+            "для эрудиции",
+            "для общения",
+            "для любопытных"
+        ],
+        name: "3-D моделирование"
+    },
+        {
+            time: ["ПН 18:00-20:00"],
+            id: "1",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            tags: [
+                "для эрудиции",
+                "для общения",
+                "для любопытных"
+            ],
+            name: "3-D моделирование"
+        },
+    ];
 }
 
 export default function Main() {
     const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
-    const [group, setGroups] = useState<Group[]>([]);
+    const [groups, setGroups] = useState<Group[]>([]);
     const [filters, setFilters] = useState<Filters>({
         type: selectedType
     });
@@ -37,6 +63,8 @@ export default function Main() {
 
     return <div>
         <Banner/>
-        <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType} className={styles.spacing_left}/>
+        <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType}
+                           className={styles.spacing_left}/>
+        <Groups groups={groups}/>
     </div>
 }
