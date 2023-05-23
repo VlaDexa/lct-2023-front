@@ -2,7 +2,7 @@ import Banner from "./components/Banner";
 import {useEffect, useState} from "react";
 import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
-import GroupCard, {Group} from "./components/GroupCard";
+import GroupCard, {Group, GroupType} from "./components/GroupCard";
 
 type Filters = {
     type: SelectedGroupType
@@ -26,11 +26,12 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             "для общения",
             "для любопытных"
         ],
+        type: GroupType.Intellectual,
         name: "3-D моделирование"
     },
         {
-            time: ["ПН 18:00-20:00"],
-            id: "1",
+            time: ["ПН 18:00-20:00", "Ещё время"],
+            id: "2",
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
@@ -39,6 +40,35 @@ async function getGroups(filters: Filters): Promise<Group[]> {
                 "для общения",
                 "для любопытных"
             ],
+            type: GroupType.Intellectual,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["ПН 18:00-20:00"],
+            id: "3",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            tags: [
+                "для эрудиции",
+                "для общения",
+                "для любопытных"
+            ],
+            type: GroupType.Intellectual,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["ПН 18:00-20:00"],
+            id: "4",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            tags: [
+                "для эрудиции",
+                "для общения",
+                "для любопытных"
+            ],
+            type: GroupType.Intellectual,
             name: "3-D моделирование"
         },
     ];
