@@ -2,21 +2,15 @@ import Banner from "./components/Banner";
 import {useEffect, useState} from "react";
 import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
-import {Group} from "./components/GroupCard";
+import GroupCard, {Group} from "./components/GroupCard";
 
 type Filters = {
     type: SelectedGroupType
 }
 
-function Group(props: {group: Group}) {
-    return <div>
-
-    </div>
-}
-
 function Groups(props: {groups: Group[]}) {
     return <div>
-        {props.groups.map(el => <Group key={el.id} group={el}/>)}
+        {props.groups.map(el => <GroupCard key={el.id} group={el}/>)}
     </div>
 }
 
