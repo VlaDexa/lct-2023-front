@@ -1,10 +1,24 @@
 :root {
-    --text-inactive: #151516;
-    --text-active: #006739;
+    --primary-green: #006739;
+    --primary-white: #F6F6F6;
+    --primary-black: #151516;
+    --secondary-green: #97DFBF;
+    --promo-red: #CC2222;
+    --promo-secondary-red: #FFACAC;
+    --slightly-shaded-white: #F6F6F6;
+    --white: #FFFFFF;
+
+    --background-color: var(--slightly-shaded-white);
+
+    --text-inactive: var(--primary-black);
+    --text-active: var(--primary-green);
     --normal-font: 16px;
     --big-banner-font: 40px;
     --placeholder-color: #494949;
-    --mint: #97DFBF;
+    --mint: var(--secondary-green);
+
+    --footer-bg: var(--primary-green);
+    --footer-text: var(--white);
 }
 
 * {
@@ -16,6 +30,11 @@
 }
 
 body {
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
+}
+
+a {
+    text-decoration: unset;
 }
