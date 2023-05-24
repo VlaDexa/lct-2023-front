@@ -22,8 +22,8 @@ export default function Footer() {
         <label className={styles.contacts} aria-label={"Контакты"}>
             <h1>Контакты</h1>
             <ul aria-label={"Контакты"}>
-                <li aria-label={"Телефон"}>Телефон: 79128079999</li>
-                <li aria-label={"Почта"}>Почта: dolgojit100_1@mos.ru</li>
+                <li aria-label={"Телефон"}><a href={"tel:79128079999"}>Телефон: 79128079999</a></li>
+                <li aria-label={"Почта"}>Почта: <a href={"mailto:dolgojit100_1@mos.ru"}>dolgojit100_1@mos.ru</a></li>
                 <li aria-label={"Адрес"}>Адрес: улица Здоровья, дом 3, корпус 1</li>
             </ul>
         </label>
