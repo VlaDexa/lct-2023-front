@@ -28,6 +28,7 @@ function LogoAndText(props: {
     children: string,
     isActive?: boolean,
     onClick?: () => void,
+    tabIndex?: number,
 }) {
     const onKeyUp = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
         if (props.onClick && event.key === "Enter") {
@@ -37,7 +38,7 @@ function LogoAndText(props: {
 
     const Logo = props.isActive ? props.activeSvg : props.normalSvg;
 
-    return <div className={styles.logo_and_text} onClick={props.onClick} onKeyUp={onKeyUp} tabIndex={0}>
+    return <div className={styles.logo_and_text} onClick={props.onClick} onKeyUp={onKeyUp} tabIndex={props.tabIndex}>
         <Logo className={styles.logo}/>
         <p className={props.isActive ? styles.active : undefined}>{props.children}</p>
     </div>
@@ -100,7 +101,7 @@ export default function NavBar(props: {forBlind: boolean, setForBlind: (blind: b
             </Link>
         </div>
         <div className={styles.align_end}>
-            <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}>Для слабовидящих</LogoAndText>
+            <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind} tabIndex={0}>Для слабовидящих</LogoAndText>
             <Vr/>
             <FontSizeChanger makeItLarger={null!} makeItSmaller={null!}></FontSizeChanger>
         </div>
