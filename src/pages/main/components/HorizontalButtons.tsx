@@ -1,7 +1,7 @@
 import styles from "./HorizontalButtons.module.css";
 import Calendar from "./../../../assets/icons/calendar.svg";
 import MapMarker from "./../../../assets/icons/map_marker.svg";
-import {MouseEventHandler, useEffect} from "react";
+import {MouseEventHandler} from "react";
 
 export enum SelectedGroupType {
     All,
