@@ -1,5 +1,5 @@
 import styles from "./GroupCard.module.css";
-import Babushka from "/babushka-sportproger.png"
+import SmartBabushka from "/babushka-sportproger.png"
 
 function SmallMapMarker() {
     return <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,9 +25,41 @@ function Clock() {
     </svg>
 }
 
+export enum GroupType {
+    Game,
+    Education,
+    Singing,
+    Painting,
+    Intellectual,
+    Theatre,
+    SilverUni,
+    Trainings,
+    Dancing,
+    Creativity,
+    Physical
+}
+
+function chooseYourBabushka(type: GroupType) {
+    switch (type) {
+        case GroupType.Game:
+        case GroupType.Education:
+            return SmartBabushka;
+        case GroupType.Singing:
+        case GroupType.Painting:
+        case GroupType.Intellectual:
+        case GroupType.Theatre:
+        case GroupType.SilverUni:
+        case GroupType.Trainings:
+        case GroupType.Dancing:
+        case GroupType.Creativity:
+        case GroupType.Physical:
+    }
+}
+
 export type Group = {
     id: string,
     name: string,
+    type: GroupType,
     tags: [string, string, string],
     address: string
     metro: string,
@@ -37,7 +69,7 @@ export type Group = {
 
 export default function GroupCard(props: { group: Group, index: number }) {
     return <div className={styles.group_card}>
-        <img src={Babushka} className={styles.preview} alt={""}/>
+        <img src={SmartBabushka} className={styles.preview} alt={""}/>
         <p className={styles.title}>{props.group.name}</p>
         <div className={styles.tag_line}>
             {props.group.tags.map(tag => <div className={styles.tag}>{tag}</div>)}
