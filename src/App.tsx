@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import Login from "./Login";
+import Login from "./pages/login/Login";
 import AfterLogin from "./AfterLogin";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Main from "./pages/main/MainPage";

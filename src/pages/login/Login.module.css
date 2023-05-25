@@ -1,0 +1,110 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.login_bubble {
+    background: var(--login-bubble-bg);
+    border: 2px solid #F6F6F6;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flower {
+    position: absolute;
+    z-index: -1;
+    transform: translateX(-455px) translateY(-125px);
+}
+
+.lines {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.title {
+    font-weight: 700;
+    font-size: calc(var(--normal-font) * 2);
+    line-height: calc(var(--normal-font) * 2 + 6);
+    color: var(--login-title-text);
+    margin-bottom: 24px;
+}
+
+.input_row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 64px;
+    margin-top: 24px;
+    margin-right: 64px;
+    align-self: start;
+    gap: 24px
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* x / 100vh = 12px / var(--page-height-figma)*/
+    /* x = (100vh * 12px)/var(--page-height-figma)/*/
+    gap: 12px;
+}
+
+.input > label {
+    color: var(--login-input-label);
+    font-weight: 400;
+    font-size: var(--normal-font);
+    line-height: calc(var(--normal-font) + 4px);
+}
+
+.input > input {
+    text-align: center;
+    background-color: var(--login-input-bg);
+    border: 2px solid var(--login-input-border);
+    border-radius: 10px;
+    padding: 15px 24px;
+    width: calc(100% - 24px * 2);
+}
+
+.error {
+    margin-top: 8px;
+    text-decoration: underline;
+    color: var(--login-error-text);
+    align-self: start;
+    margin-left: 64px;
+}
+
+.secondary_title {
+    margin-top: 18px;
+
+    color: var(--login-title-text);
+    font-weight: 700;
+    font-size: calc(var(--normal-font) + 6px);
+    line-height: 26px;
+}
+
+.submit {
+    margin: 48px 64px 31px;
+    padding: 15px 24px;
+
+    font-weight: 700;
+    font-size: calc(var(--normal-font) + 6px);
+    line-height: 26px;
+
+    color: var(--login-submit-color);
+
+    background-color: var(--login-submit-bg);
+    border: 2px solid var(--login-submit-bg);
+    border-radius: 10px;
+
+    width: calc(100% - 64px * 2);
+}

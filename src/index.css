@@ -3,10 +3,13 @@
     --primary-white: #F6F6F6;
     --primary-black: #151516;
     --secondary-green: #97DFBF;
-    --promo-red: #CC2222;
-    --promo-secondary-red: #FFACAC;
+    --primary-red: #CC2222;
+    --secondary-red: #FFACAC;
     --slightly-shaded-white: #F6F6F6;
     --white: #FFFFFF;
+
+    --page-height-figma: 1024px;
+    --page-width-figma: 1400px;
 
     --background-color: var(--slightly-shaded-white);
 
@@ -19,6 +22,15 @@
 
     --footer-bg: var(--primary-green);
     --footer-text: var(--white);
+
+    --login-bubble-bg: var(--white);
+    --login-title-text: var(--primary-green);
+    --login-input-bg: var(--primary-white);
+    --login-input-border: var(--primary-green);
+    --login-input-label: var(--primary-black);
+    --login-submit-bg: var(--primary-green);
+    --login-submit-color: var(--primary-white);
+    --login-error-text: var(--primary-red)
 }
 
 * {
