@@ -20,6 +20,11 @@
     --placeholder-color: #494949;
     --mint: var(--secondary-green);
 
+    --button-primary-bg-color: var(--primary-green);
+    --button-primary-text-color: var(--primary-white);
+    --button-secondary-bg-color: transparent;
+    --button-secondary-text-color: var(--primary-green);
+
     --footer-bg: var(--primary-green);
     --footer-text: var(--white);
 
@@ -30,7 +35,13 @@
     --login-input-label: var(--primary-black);
     --login-submit-bg: var(--primary-green);
     --login-submit-color: var(--primary-white);
-    --login-error-text: var(--primary-red)
+    --login-error-text: var(--primary-red);
+
+    --question-outer-ring: var(--primary-green);
+    --card-bg-color: var(--primary-white);
+
+    --quiz-input-bg-color: var(--primary-white);
+    --quiz-input-border-color: var(--primary-green);
 }
 
 * {
@@ -39,6 +50,20 @@
     font-weight: 400;
     font-size: var(--normal-font);
     line-height: 22px;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+h2 {
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 32px;
 }
 
 body {

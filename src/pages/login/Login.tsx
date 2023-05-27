@@ -52,20 +52,6 @@ export default function Login({setUser}: { setUser: (info: LoginInfo) => unknown
     useEffect(() => setError(""), [name, surname]);
     useEffect(() => setDateError(""), [day, month, year]);
 
-    // const months = [
-    //     {name: "январь", dateAmount: 31},
-    //     {name: "февраль", dateAmount: 28},
-    //     {name: "март", dateAmount: 31},
-    //     {name: "апрель", dateAmount: 30},
-    //     {name: "май", dateAmount: 31},
-    //     {name: "июнь", dateAmount: 30},
-    //     {name: "июль", dateAmount: 31},
-    //     {name: "август", dateAmount: 31},
-    //     {name: "сентябрь", dateAmount: 30},
-    //     {name: "октябрь", dateAmount: 31},
-    //     {name: "ноябрь", dateAmount: 30},
-    //     {name: "декабрь", dateAmount: 31},
-    // ];
     const months = new Map(
         [
             ["январь", 31],

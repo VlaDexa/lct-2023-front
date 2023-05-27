@@ -5,6 +5,7 @@ export type QuestionProps<Answer> = {
     stepNum: number,
     maxSteps: number,
     onSubmit?: React.FormEventHandler<HTMLFormElement>,
+    onBack?: () => void,
     setError?: (error: string) => unknown
     className?: string,
     nextButtonText: string,
@@ -27,7 +28,6 @@ export default function QuestionSkeleton<Answer, ChildProps, ChildComponent exte
     }
 ) {
     const [shouldUnblock, setShouldUnblock] = useState(false);
-
     const requiredProps: RequiredProps<Answer> = {
         className: props.childClass,
         setShouldUnblock
@@ -49,7 +49,10 @@ export default function QuestionSkeleton<Answer, ChildProps, ChildComponent exte
                         props.backButtonText
                             ?
                             <div className={styles.button_row}>
-                                <button className={styles.back}>{props.backButtonText}</button>
+                                <button className={styles.back}
+                                        type={"button"}
+                                        onClick={props.onBack}
+                                >{props.backButtonText}</button>
                                 <button className={styles.next}
                                         disabled={!shouldUnblock}>{props.nextButtonText}</button>
                             </div>

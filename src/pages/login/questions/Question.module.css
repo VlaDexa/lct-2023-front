@@ -1,0 +1,107 @@
+.border_around_card {
+    border: 2px solid var(--question-outer-ring);
+    border-radius: 20px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 20px;
+}
+
+.title {
+    margin-top: 0;
+    justify-self: center;
+    align-self: center;
+}
+
+.step {
+    color: var(--placeholder-color);
+    margin: 24px 0 0 24px;
+}
+
+.button_row {
+    margin: 32px 42px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.button_row > button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+.single_button {
+    margin: 32px 42px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.single_button > button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    margin-top: 25px;
+
+    width: 48%;
+}
+
+.next {
+    align-self: center;
+    justify-self: center;
+
+    background-color: var(--button-primary-bg-color);
+    color: var(--button-primary-text-color);
+    border: 2px solid var(--button-primary-bg-color);
+    border-radius: 10px;
+}
+
+.next:disabled {
+    background-color: transparent;
+    color: var(--button-primary-bg-color);
+}
+
+.back {
+    align-self: center;
+    justify-self: center;
+
+    background-color: var(--button-secondary-bg-color);
+    color: var(--button-secondary-text-color);
+    border: 2px solid var(--button-primary-bg-color);
+    border-radius: 10px;
+}
+
+.input[type="radio"] {
+    appearance: none;
+
+    border: 2px solid var(--text-active);
+    border-radius: 10px;
+
+    width: calc(var(--normal-font) + 12px);
+    height: calc(var(--normal-font) + 12px);
+}
+
+.input[type="radio"]:checked {
+    background-color: var(--text-active);
+    background-image: url("/check.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.select_option {
+    display: flex;
+    flex-direction: row;
+
+    gap: 16px;
+
+    padding-top: 0;
+}
