@@ -66,6 +66,24 @@ h2 {
     font-size: 32px;
 }
 
+.checkbox_like_radio {
+    appearance: none;
+
+    border: 2px solid var(--text-active);
+    border-radius: 10px;
+    background-image: url("/check.svg");
+    background-color: var(--white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transition: background-color 200ms linear;
+}
+
+.checkbox_like_radio:checked {
+    background-color: var(--text-active);
+}
+
 body {
     background-color: var(--background-color);
     margin: 0;

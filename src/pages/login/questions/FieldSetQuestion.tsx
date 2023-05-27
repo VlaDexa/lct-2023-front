@@ -6,13 +6,13 @@ export type FieldSetQuestionElementProps = {
     answerName: string,
 }
 
-
 export const FieldSetQuestionElement: QuestionElement<string, FieldSetQuestionElementProps> = (props) => {
     return (
         <fieldset className={props.className}>
             {props.options.map((option) => (
                 <label key={option} style={{display: "flex", flexDirection: "row"}}>
-                    <input type="radio" name={props.answerName} value={option} className={styles.input}
+                    <input type="radio" name={props.answerName} value={option}
+                           className={["checkbox_like_radio", styles.input].join(" ")}
                            onChange={() => props.setShouldUnblock(true)}/>
                     <span style={{placeSelf: "center"}}>{option}</span>
                 </label>
