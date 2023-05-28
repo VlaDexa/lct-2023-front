@@ -6,12 +6,20 @@ import {InputQuestionElement, InputQuestionProps} from "./questions/InputQuestio
 import {TableFieldQuestionElement, TableFieldQuestionElementProps} from "./questions/TableFieldQuestion";
 import {LoginInfo} from "../../App";
 
+async function sendQuiz(
+    gender: string,
+    address: string,
+    activities: { name: string, value: number }[]
+) {
+
+}
+
 export default function Quiz(props: {
     setUser: React.Dispatch<React.SetStateAction<LoginInfo | undefined>>
 }) {
-    const maxSteps = 6;
+    const maxSteps = 3;
 
-    const [_gender, setGender] = useState("");
+    const [gender, setGender] = useState("");
     const [question, setQuestion] = useState(0);
     const [address, setAddress] = useState("");
     const [activities, setActivities] = useState<
@@ -87,11 +95,12 @@ export default function Quiz(props: {
                 value: Number(data.get(name)! as unknown as string)
             })
         }
-        console.log(activities_arr);
+
         setActivities(activities_arr);
+        sendQuiz(gender, address, activities_arr);
         props.setUser((old) => {
             old!.needsQuiz = false;
-            return old;
+            return {...old!};
         })
     }, [setActivities, setQuestion, things]);
 
