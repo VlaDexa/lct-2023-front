@@ -103,7 +103,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
         <p className={styles.title}>{props.group.name}</p>
         <div className={styles.tag_line}>
-            {props.group.tags.map(tag => <div className={styles.tag}>{tag}</div>)}
+            {props.group.tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
         </div>
         <p className={styles.index}>№{props.index + 1} в вашем рейтинге</p>
         <div className={styles.date_place}>
