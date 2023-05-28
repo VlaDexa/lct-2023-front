@@ -25,6 +25,8 @@
     text-align: center;
     align-items: center;
     transition: all 1s linear;
+
+    cursor: pointer;
 }
 
 .logo_and_text p {

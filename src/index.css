@@ -50,6 +50,10 @@
     --profile-title-bg-color: var(--secondary-green);
 }
 
+body[data-blind="true"] {
+    filter: saturate(0);
+}
+
 * {
     font-family: 'Golos Text', serif;
     font-style: normal;

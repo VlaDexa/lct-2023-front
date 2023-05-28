@@ -5,6 +5,8 @@ import {ReactComponent as PersonNormal} from "./assets/icons/person/normal.svg";
 import {ReactComponent as PersonActive} from "./assets/icons/person/active.svg";
 import {ReactComponent as HomeNormal} from "./assets/icons/home/normal.svg";
 import {ReactComponent as HomeActive} from "./assets/icons/home/active.svg";
+import {ReactComponent as EyeNormal} from "./assets/icons/eye/normal.svg";
+import {ReactComponent as EyeActive} from "./assets/icons/eye/active.svg";
 import {FunctionComponent, KeyboardEvent, SVGProps, useCallback, useEffect, useState} from "react";
 import FontSizeChanger from "./FontSizeChanger";
 import {Link} from "react-router-dom";
@@ -83,7 +85,10 @@ export default function NavBar(props: {forBlind: boolean, setForBlind: (blind: b
     }, [setNavState]);
 
     const setForBlind = useCallback(() => {
-        props.setForBlind(!props.forBlind)
+        props.setForBlind(!props.forBlind);
+        const blind_attr = document.body.attributes.getNamedItem("data-blind")!;
+        blind_attr.value = (!props.forBlind).toString();
+        document.body.attributes.setNamedItem(blind_attr);
     }, [props.setForBlind, props.forBlind]);
 
     return <nav className={styles.nav}>
@@ -101,8 +106,9 @@ export default function NavBar(props: {forBlind: boolean, setForBlind: (blind: b
             </Link>
         </div>
         <div className={styles.align_end}>
-            {/*<LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind} tabIndex={0}>Для слабовидящих</LogoAndText>*/}
-            {/*<Vr/>*/}
+            <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}
+                         tabIndex={0}>Для слабовидящих</LogoAndText>
+            <Vr/>
             <FontSizeChanger makeItLarger={null!} makeItSmaller={null!}></FontSizeChanger>
         </div>
     </nav>
