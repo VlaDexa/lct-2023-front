@@ -1,5 +1,5 @@
 import Banner from "./components/Banner";
-import {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
@@ -74,12 +74,47 @@ async function getGroups(filters: Filters): Promise<Group[]> {
     ];
 }
 
+function PageSwitcher(props: {
+    maxPages: number,
+    page: number,
+    setPage: React.Dispatch<React.SetStateAction<number>>,
+}) {
+    const nextButton = useMemo(() =>
+        <button className={"btn btn_primary"} onClick={() => props.setPage(old => old + 1)}>
+            <b>Далее</b>
+        </button>, [props.setPage]
+    );
+    const prevButton = useMemo(() =>
+        <button className={"btn btn_primary"} onClick={() => props.setPage(old => old - 1)}>
+            <b>Назад</b>
+        </button>, [props.setPage]
+    );
+
+    if (props.maxPages <= 1) {
+        return <></>
+    } else if (props.page == 0) {
+        return <div className={styles.single_button}>
+            {nextButton}
+        </div>
+    } else if (props.page >= props.maxPages) {
+        return <div className={styles.single_button}>
+            {prevButton}
+        </div>
+    } else {
+        return <div className={styles.two_buttons}>
+            {prevButton}
+            {nextButton}
+        </div>
+    }
+}
+
 export default function Main() {
     const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
     const [groups, setGroups] = useState<Group[]>([]);
     const [filters, setFilters] = useState<Filters>({
         type: selectedType
     });
+    const [page, setPage] = useState(0);
 
     useEffect(() => {
         setFilters({
@@ -91,10 +126,11 @@ export default function Main() {
         getGroups(filters).then(setGroups);
     }, [filters])
 
-    return <div>
+    return <>
         <Banner/>
         <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType}
                            className={styles.spacing_left}/>
         <Groups groups={groups}/>
-    </div>
+        <PageSwitcher page={page} setPage={setPage} maxPages={groups.length / 6}/>
+    </>
 }

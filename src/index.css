@@ -64,6 +64,10 @@ button:disabled {
     cursor: not-allowed;
 }
 
+button:hover {
+    text-decoration: underline;
+}
+
 h2 {
     color: var(--primary-green);
     font-weight: 700;
@@ -90,6 +94,16 @@ b {
 
 .checkbox_like_radio:checked {
     background-color: var(--text-active);
+}
+
+.btn {
+    border: 2px solid var(--button-primary-bg-color);
+}
+
+.btn_primary {
+    background-color: var(--button-primary-bg-color);
+    color: var(--button-primary-text-color);
+    border-radius: 10px;
 }
 
 body {
