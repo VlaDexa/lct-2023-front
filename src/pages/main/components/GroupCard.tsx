@@ -1,5 +1,15 @@
 import styles from "./GroupCard.module.css";
 import SmartBabushka from "/babushka-sportproger.png"
+import ArtisticBabushka from "/artistic_babushka.png";
+import GameStarperi from "/game_starperi.png";
+import SingingBabushki from "/singing_babushki.png";
+import TheatricalStarperi from "/theatrical_starperi.png";
+import BusinessBabushki from "/business_babushki.png";
+import DancingStarperi from "/dancing_starperi.png";
+import CreativeBabushka from "/creative_babushka.png";
+import SportDedi from "/sport_dedi.png";
+import BoatBabushki from "/boat_babushki.png";
+import IntellectualTour from "/intellectual_tour.png";
 
 function SmallMapMarker() {
     return <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,17 +52,27 @@ export enum GroupType {
 function chooseYourBabushka(type: GroupType) {
     switch (type) {
         case GroupType.Game:
+            return GameStarperi;
         case GroupType.Education:
             return SmartBabushka;
         case GroupType.Singing:
+            return SingingBabushki;
         case GroupType.Painting:
+            return ArtisticBabushka;
         case GroupType.Intellectual:
+            return IntellectualTour;
         case GroupType.Theatre:
+            return TheatricalStarperi;
         case GroupType.SilverUni:
+            return BusinessBabushki;
         case GroupType.Trainings:
+            return SportDedi;
         case GroupType.Dancing:
+            return DancingStarperi;
         case GroupType.Creativity:
+            return CreativeBabushka;
         case GroupType.Physical:
+            return BoatBabushki;
     }
 }
 
@@ -80,7 +100,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
     });
 
     return <div className={styles.group_card}>
-        <img src={SmartBabushka} className={styles.preview} alt={""}/>
+        <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
         <p className={styles.title}>{props.group.name}</p>
         <div className={styles.tag_line}>
             {props.group.tags.map(tag => <div className={styles.tag}>{tag}</div>)}
