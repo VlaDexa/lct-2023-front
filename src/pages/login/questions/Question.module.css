@@ -18,6 +18,8 @@
     justify-self: center;
     align-self: center;
 
+    text-align: center;
+
     margin: 0 115px;
 }
 
@@ -50,8 +52,6 @@
 .single_button > button {
     padding-top: 15px;
     padding-bottom: 15px;
-
-    margin-top: 25px;
 
     width: 48%;
 }

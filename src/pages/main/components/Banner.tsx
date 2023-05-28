@@ -9,7 +9,7 @@ export default function Banner() {
             <div className={styles.flex_row}><p className={styles.big_text}>Эти&nbsp;</p><p
                 className={[styles.inverse_color_text_upper, styles.big_text].join(" ")}>&nbsp;мероприятия&nbsp;</p>
             </div>
-            <div className={styles.flex_row}><p className={styles.big_text}>могут вас&nbsp;</p><p
+            <div className={styles.flex_row}><p className={styles.big_text}>могут Вас&nbsp;</p><p
                 className={[styles.inverse_color_text_lower, styles.big_text].join(" ")}>&nbsp;заинтересовать!&nbsp;</p>
             </div>
             <p className={styles.how_does_it_work}>Как это работает?</p>

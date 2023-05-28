@@ -67,7 +67,7 @@ function getTags(type: GroupType): string[] {
         ['физическая активность', ['против стресса', 'для здоровья', 'для координации', 'для общения']]
     ]);
 
-    return tags.get(type)!;
+    return tags.get(type)!.slice(0, 3);
 }
 
 function chooseYourBabushka(type: GroupType) {
