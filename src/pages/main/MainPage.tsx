@@ -16,7 +16,7 @@ function Groups(props: {groups: Group[]}) {
 
 async function getGroups(filters: Filters): Promise<Group[]> {
     return [{
-        time: ["ПН 18:00-20:00"],
+        time: ["Понедельник 18:00 - 20:00"],
         id: "1",
         timeToWalk: 17,
         metro: "Чертаново",
@@ -30,7 +30,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
         name: "3-D моделирование"
     },
         {
-            time: ["ПН 18:00-20:00", "Ещё время"],
+            time: ["Понедельник 18:00 - 20:00", "Понедельник 18:00 - 20:00"],
             id: "2",
             timeToWalk: 17,
             metro: "Чертаново",
@@ -44,7 +44,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             name: "3-D моделирование"
         },
         {
-            time: ["ПН 18:00-20:00"],
+            time: ["Понедельник 18:00 - 20:00"],
             id: "3",
             timeToWalk: 17,
             metro: "Чертаново",
@@ -58,7 +58,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             name: "3-D моделирование"
         },
         {
-            time: ["ПН 18:00-20:00"],
+            time: ["Понедельник 18:00 - 20:00"],
             id: "4",
             timeToWalk: 17,
             metro: "Чертаново",

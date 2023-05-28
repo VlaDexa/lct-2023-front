@@ -68,6 +68,17 @@ export type Group = {
 }
 
 export default function GroupCard(props: { group: Group, index: number }) {
+
+    const split_time = props.group.time.map(time => {
+        const split = time.split(" ");
+        const day = split[0];
+        const timetime = split.slice(1).join(" ");
+        return {
+            day,
+            time: timetime
+        }
+    });
+
     return <div className={styles.group_card}>
         <img src={SmartBabushka} className={styles.preview} alt={""}/>
         <p className={styles.title}>{props.group.name}</p>
@@ -75,6 +86,18 @@ export default function GroupCard(props: { group: Group, index: number }) {
             {props.group.tags.map(tag => <div className={styles.tag}>{tag}</div>)}
         </div>
         <p className={styles.index}>№{props.index + 1} в вашем рейтинге</p>
+        <div className={styles.date_place}>
+            <Clock/>
+            <div className={styles.dates}>
+                {split_time.map(({day, time}) =>
+                    <p key={day} className={styles.date}>
+                        <b>{day}</b>
+                        &nbsp;
+                        {time}
+                    </p>
+                )}
+            </div>
+        </div>
         <div className={styles.address_place}>
             <div className={styles.address_string}>
                 <SmallMapMarker/>
@@ -83,13 +106,8 @@ export default function GroupCard(props: { group: Group, index: number }) {
             <div className={styles.metro_string}>
                 <MetroMarker/>
                 <p>{props.group.metro}</p>
+                <p> &#9679;</p>
                 <p>{props.group.timeToWalk} минут пешком</p>
-            </div>
-        </div>
-        <div className={styles.date_place}>
-            <Clock/>
-            <div className={styles.dates}>
-                {props.group.time.map(time => <p className={styles.date}>{time}</p>)}
             </div>
         </div>
         <div className={styles.button_row}>
