@@ -11,7 +11,7 @@ import React, {
     useMemo,
     useState
 } from "react";
-import {ApiError, OpenAPI, RecsService, UserService} from "../../openapi/index";
+import {ApiError, OpenAPI, RecsService, UserService} from "../../openapi";
 
 function InputAndLabel({setText, text, id, label, placeholder, required, type, max, min, list, onInput}: {
     label: string,
@@ -79,10 +79,11 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         if (surname === "") {
             setError("Вы пропустили пункт фамилия");
             return;
-        } else if (/\d/.exec(surname)) {
-            setError("Фамилия не может содержать цифры");
-            return;
         }
+            // else if (/\d/.exec(surname)) {
+            //     setError("Фамилия не может содержать цифры");
+            //     return;
+            // }
             // else if (name === "") {
             //     setError("Вы пропустили пункт имя")
             //     return;
@@ -140,7 +141,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
 
         const exists = await RecsService.isExistRecsApiV1RecsIsExistGet();
 
-        setUser((old) => {
+        setUser(() => {
             return {
                 name,
                 surname,
