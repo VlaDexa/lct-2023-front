@@ -17,20 +17,20 @@ function Groups(props: {groups: Group[]}) {
     </div>
 }
 
-async function getGroups(filters: Filters): Promise<Group[]> {
+function pageFilter(filters: Filters, groups: Group[]) {
     const AMOUNT_ON_PAGE = 6;
+    return groups.slice(filters.page * AMOUNT_ON_PAGE, filters.page * AMOUNT_ON_PAGE + AMOUNT_ON_PAGE);
+    // return groups;
+}
 
-    function pageFilter(groups: Group[]) {
-        return groups.slice(filters.page * AMOUNT_ON_PAGE, filters.page * AMOUNT_ON_PAGE + AMOUNT_ON_PAGE);
-    }
-
+async function getGroups(): Promise<Group[]> {
     const groups = new Promise<Group[]>(resolve => resolve([{
         time: ["Понедельник 18:00 - 20:00"],
         id: "1",
         timeToWalk: 17,
         metro: "Чертаново",
         address: "Карельский бульвар, дом 20",
-        type: GroupType.Education,
+        type: GroupType.Game,
         name: "3-D моделирование"
     },
         {
@@ -48,7 +48,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
-            type: GroupType.Education,
+            type: GroupType.Singing,
             name: "3-D моделирование"
         },
         {
@@ -57,12 +57,84 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
-            type: GroupType.Education,
+            type: GroupType.Painting,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "5",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Intellectual,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "6",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Theatre,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "7",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.SilverUni,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "8",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Trainings,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "9",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Dancing,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "10",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Creativity,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "11",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Physical,
+            name: "3-D моделирование"
+        },
+        {
+            time: ["Понедельник 18:00 - 20:00"],
+            id: "12",
+            timeToWalk: 17,
+            metro: "Чертаново",
+            address: "Карельский бульвар, дом 20",
+            type: GroupType.Physical,
             name: "3-D моделирование"
         },
     ]));
 
-    return groups.then(pageFilter);
+    return groups;
 }
 
 function PageSwitcher(props: {
@@ -81,13 +153,13 @@ function PageSwitcher(props: {
         </button>, [props.setPage]
     );
 
-    if (props.maxPages <= 1) {
+    if (props.maxPages == 0) {
         return <></>
     } else if (props.page == 0) {
         return <div className={styles.single_button}>
             {nextButton}
         </div>
-    } else if (props.page >= props.maxPages) {
+    } else if (props.page == props.maxPages) {
         return <div className={styles.single_button}>
             {prevButton}
         </div>
@@ -102,6 +174,7 @@ function PageSwitcher(props: {
 export default function Main() {
     const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
     const [groups, setGroups] = useState<Group[]>([]);
+    const [shownGroups, setShownGroups] = useState(groups);
     const [page, setPage] = useState(0);
     const [filters, setFilters] = useState<Filters>({
         type: selectedType,
@@ -115,19 +188,24 @@ export default function Main() {
             return {
                 ...old,
                 type: selectedType,
+                page
             }
         });
     }, [selectedType, page])
 
     useEffect(() => {
-        getGroups(filters).then(setGroups);
-    }, [filters])
+        getGroups().then(setGroups);
+    }, []);
+
+    useEffect(() => {
+        setShownGroups(pageFilter(filters, groups));
+    }, [filters, groups])
 
     return <>
         <Banner/>
         <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType}
                            className={styles.spacing_left} setFilters={setFilters} recs={true}/>
-        <Groups groups={groups}/>
-        <PageSwitcher page={page} setPage={setPage} maxPages={groups.length / 6}/>
+        <Groups groups={shownGroups}/>
+        <PageSwitcher page={page} setPage={setPage} maxPages={Math.ceil(groups.length / 6) - 1}/>
     </>
 }
