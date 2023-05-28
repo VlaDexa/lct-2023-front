@@ -139,18 +139,26 @@ export default function GroupCard(props: { group: Group, index: number }) {
                 )}
             </div>
         </div>
-        <div className={styles.address_place}>
-            <div className={styles.address_string}>
-                <SmallMapMarker/>
-                <p>{props.group.address}</p>
+        {props.group.metro !== "Онлайн" ?
+            <div className={styles.address_place}>
+                <div className={styles.address_string}>
+                    <SmallMapMarker/>
+                    <p>{props.group.address}</p>
+                </div>
+                <div className={styles.metro_string}>
+                    <MetroMarker/>
+                    <p>{props.group.metro}</p>
+                    <p> &#9679;</p>
+                    <p>{props.group.timeToWalk} минут пешком</p>
+                </div>
+            </div> :
+            <div className={styles.address_place}>
+                <div className={styles.address_string}>
+                    <SmallMapMarker/>
+                    <h3>{props.group.metro}</h3>
+                </div>
             </div>
-            <div className={styles.metro_string}>
-                <MetroMarker/>
-                <p>{props.group.metro}</p>
-                <p> &#9679;</p>
-                <p>{props.group.timeToWalk} минут пешком</p>
-            </div>
-        </div>
+        }
         <div className={styles.button_row}>
             <button className={styles.more_button}>Подробнее</button>
             <button className={styles.signup_button}>Записаться</button>
