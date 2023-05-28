@@ -10,6 +10,8 @@ import CreativeBabushka from "/creative_babushka.png";
 import SportDedi from "/sport_dedi.png";
 import BoatBabushki from "/boat_babushki.png";
 import IntellectualTour from "/intellectual_tour.png";
+import {useCallback} from "react";
+import {GroupsService} from "../../../openapi";
 
 export function SmallMapMarker(props: { aria_hidden?: boolean }) {
     return <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +121,11 @@ export default function GroupCard(props: { group: Group, index: number }) {
     });
 
     const tags = getTags(props.group.type);
+
+    const register = useCallback(() => {
+        GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id));
+        alert("Вы зарегестрировались на " + props.group.name);
+    }, [props.group.id]);
 
     return <div className={styles.group_card}>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
