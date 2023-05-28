@@ -5,7 +5,8 @@ import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButto
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
 
 type Filters = {
-    type: SelectedGroupType
+    type: SelectedGroupType,
+    page: number
 }
 
 function Groups(props: {groups: Group[]}) {
@@ -15,7 +16,13 @@ function Groups(props: {groups: Group[]}) {
 }
 
 async function getGroups(filters: Filters): Promise<Group[]> {
-    return [{
+    const AMOUNT_ON_PAGE = 6;
+
+    function pageFilter(groups: Group[]) {
+        return groups.slice(filters.page * AMOUNT_ON_PAGE, filters.page * AMOUNT_ON_PAGE + AMOUNT_ON_PAGE);
+    }
+
+    const groups = new Promise<Group[]>(resolve => resolve([{
         time: ["Понедельник 18:00 - 20:00"],
         id: "1",
         timeToWalk: 17,
@@ -30,7 +37,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
         name: "3-D моделирование"
     },
         {
-            time: ["Понедельник 18:00 - 20:00", "Понедельник 18:00 - 20:00"],
+            time: ["Понедельник 18:00 - 20:00", "Вторник 18:00 - 20:00"],
             id: "2",
             timeToWalk: 17,
             metro: "Чертаново",
@@ -71,7 +78,9 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             type: GroupType.Intellectual,
             name: "3-D моделирование"
         },
-    ];
+    ]));
+
+    return groups.then(pageFilter);
 }
 
 function PageSwitcher(props: {
@@ -111,16 +120,18 @@ function PageSwitcher(props: {
 export default function Main() {
     const [selectedType, setSelectedType] = useState(SelectedGroupType.All);
     const [groups, setGroups] = useState<Group[]>([]);
-    const [filters, setFilters] = useState<Filters>({
-        type: selectedType
-    });
     const [page, setPage] = useState(0);
+    const [filters, setFilters] = useState<Filters>({
+        type: selectedType,
+        page
+    });
 
     useEffect(() => {
         setFilters({
-            type: selectedType
+            type: selectedType,
+            page
         });
-    }, [selectedType])
+    }, [selectedType, page])
 
     useEffect(() => {
         getGroups(filters).then(setGroups);
