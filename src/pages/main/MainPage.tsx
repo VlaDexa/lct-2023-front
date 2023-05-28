@@ -3,6 +3,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
+import {GroupsService, RecsService} from "../../openapi";
 
 export type Filters = {
     type: SelectedGroupType,
@@ -24,116 +25,23 @@ function pageFilter(filters: Filters, groups: Group[]) {
 }
 
 async function getGroups(): Promise<Group[]> {
-    const groups = new Promise<Group[]>(resolve => resolve([{
-        time: ["Понедельник 18:00 - 20:00"],
-        id: "1",
-        timeToWalk: 17,
-        metro: "Чертаново",
-        address: "Карельский бульвар, дом 20",
-        type: GroupType.Game,
-        name: "3-D моделирование"
-    },
-        {
-            time: ["Понедельник 18:00 - 20:00", "Вторник 18:00 - 20:00"],
-            id: "2",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Education,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "3",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Singing,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "4",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Painting,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "5",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Intellectual,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "6",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Theatre,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "7",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.SilverUni,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "8",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Trainings,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "9",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Dancing,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "10",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Creativity,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "11",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Physical,
-            name: "3-D моделирование"
-        },
-        {
-            time: ["Понедельник 18:00 - 20:00"],
-            id: "12",
-            timeToWalk: 17,
-            metro: "Чертаново",
-            address: "Карельский бульвар, дом 20",
-            type: GroupType.Physical,
-            name: "3-D моделирование"
-        },
-    ]));
+    const is_old = await RecsService.isExistRecsApiV1RecsIsExistGet();
 
+    const groups_nums: number[] = is_old ?
+        await RecsService.giveRecsApiV1RecsGet() :
+        await RecsService.giveRecsForNewUsersApiV1RecsNewPost();
+
+    const groups: Group[] = (await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums)).map(group => {
+        return {
+            type: group.type.toLowerCase() as GroupType,
+            name: group.name,
+            address: group.address,
+            metro: group.metro!,
+            timeToWalk: group.timeToWalk,
+            id: group.id.toString(),
+            time: Array.isArray(group.time) ? group.time : group.time.split(";")
+        }
+    });
     return groups;
 }
 

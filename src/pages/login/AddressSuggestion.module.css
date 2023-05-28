@@ -1,0 +1,51 @@
+.suggestion {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    margin: 0 76px 0;
+}
+
+.suggestion_list {
+    appearance: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    border: 2px solid #006739;
+    border-radius: 10px;
+
+    height: max-content;
+    overflow: hidden;
+}
+
+.suggestion_element {
+    appearance: none;
+    border: 1px solid var(--button-primary-bg-color);
+    border-top: none;
+}
+
+.suggestion_element:first-of-type {
+    border-top: none;
+    border-radius: 10px 10px 0 0;
+}
+
+.suggestion_element:last-of-type {
+    border-radius: 0 0 10px 10px;
+}
+
+.button {
+    background-color: var(--button-secondary-bg-color);
+    width: 100%;
+    text-align: center;
+
+    color: var(--placeholder-color);
+    padding: 15px 0;
+
+    border: 0;
+}
+
+.button:hover {
+    background-color: var(--secondary-green);
+}

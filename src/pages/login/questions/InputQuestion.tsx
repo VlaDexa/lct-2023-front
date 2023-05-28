@@ -1,6 +1,7 @@
 import {QuestionElement} from "./QuestionSkeleton";
 import React, {useEffect, useState} from "react";
 import {RoutesService} from "../../../openapi";
+import AddressSuggestion from "../AddressSuggestion";
 
 export type InputQuestionProps = {
     input: string;
@@ -94,7 +95,7 @@ const smthng = {
 };
 
 const getAddress = async (cords: GeolocationCoordinates): Promise<string> => {
-    const api: typeof smthng = await RoutesService.getAddressApiV1RoutesAddressGet(`((${cords.latitude}),(${cords.longitude}))`);
+    const api = await RoutesService.getAddressApiV1RoutesAddressGet(`((${cords.latitude}),(${cords.longitude}))`) as unknown as typeof smthng;
 
     return api.features[0].properties.label;
 };
@@ -129,13 +130,16 @@ export const InputQuestionElement: QuestionElement<string, InputQuestionProps> =
     };
 
     return (
-        <input
-            className={props.className}
-            value={props.input}
-            onInput={handleInputChange}
-            placeholder={props.placeholder}
-            name={props.inputName}
-            required={true}
-        />
+        <>
+            <input
+                className={props.className}
+                value={props.input}
+                onInput={handleInputChange}
+                placeholder={props.placeholder}
+                name={props.inputName}
+                required={true}
+            />
+            <AddressSuggestion currentInput={props.input} setInput={props.setInput}/>
+        </>
     );
 };
