@@ -20,7 +20,7 @@ export default function Footer() {
             <LinkToSocial logo={Tg} text={"Мы в Телеграмме"} link={"https://t.me/mosdolgoletie"}/>
         </div>
         <label className={styles.contacts} aria-label={"Контакты"}>
-            <h1>Контакты</h1>
+            <b>Контакты</b>
             <ul aria-label={"Контакты"}>
                 <li aria-label={"Телефон"}><a href={"tel:79128079999"}>Телефон: 79128079999</a></li>
                 <li aria-label={"Почта"}>Почта: <a href={"mailto:dolgojit100_1@mos.ru"}>dolgojit100_1@mos.ru</a></li>
