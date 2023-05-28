@@ -5,9 +5,13 @@
   "homepage": "https://vladexa.github.io/lct-2023-front/",
   "type": "module",
   "scripts": {
+    "predev": "npm run types:openapi",
     "dev": "vite",
+    "prebuild": "npm run types:openapi",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "prepreview": "npm run types:openapi",
+    "preview": "vite preview",
+    "types:openapi": "openapi -i https://api.lapki.itatmisis.ru:8080/openapi.json -o src/openapi"
   },
   "dependencies": {
     "react": "^18.2.0",

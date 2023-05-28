@@ -11,6 +11,7 @@ import React, {
     useMemo,
     useState
 } from "react";
+import {ApiError, OpenAPI, RecsService, UserService} from "../../openapi/index";
 
 function InputAndLabel({setText, text, id, label, placeholder, required, type, max, min, list, onInput}: {
     label: string,
@@ -72,16 +73,21 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
     const monthNames = Array.from(months.keys());
     const thisYear = new Date().getFullYear();
 
-    const onSubmit: FormEventHandler<HTMLFormElement> = useCallback((event) => {
+    const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(async (event) => {
         event.preventDefault();
 
         if (surname === "") {
             setError("Вы пропустили пункт фамилия");
             return;
-        } else if (name === "") {
-            setError("Вы пропустили пункт имя")
+        } else if (/\d/.exec(surname)) {
+            setError("Фамилия не может содержать цифры");
             return;
-        } else if (month === "") {
+        }
+            // else if (name === "") {
+            //     setError("Вы пропустили пункт имя")
+            //     return;
+        // }
+        else if (month === "") {
             setDateError("Вы пропустили пункт месяц");
             return;
         } else if (!monthNames.includes(month)) {
@@ -89,6 +95,9 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             return;
         } else if (day === "") {
             setDateError("Вы пропустили пункт день");
+            return;
+        } else if (Number(day) < 1) {
+            setDateError("День не может быть меньше 0");
             return;
         } else if (months.get(month)! < Number(day)) {
             const maxDay = months.get(month)!;
@@ -102,8 +111,42 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             return;
         }
 
-        setUser({
-            needsQuiz: true,
+        let i = 1;
+        for (const key_month of months.keys()) {
+            if (key_month === month) break;
+            i++;
+        }
+
+        const login_data = {
+            password: `${year}-${i}-${day}`,
+            username: surname,
+        };
+
+        const maybeSignedIn = await UserService.createUserApiV1UserCreateUserPost({
+            name: login_data.username,
+            birthday_date: login_data.password
+        })
+            .catch((error) => {
+                if (error instanceof ApiError && error.status == 409) return;
+                throw error;
+            }).then(() => UserService.loginForTokenApiV1UserTokenPost(login_data)).then(token => token.access_token);
+
+        // OpenAPI.PASSWORD = login_data.password;
+        // OpenAPI.USERNAME = login_data.username;
+        OpenAPI.HEADERS = {
+            "Authorization": `Bearer ${maybeSignedIn}`
+        }
+        // OpenAPI.WITH_CREDENTIALS
+
+        const exists = await RecsService.isExistRecsApiV1RecsIsExistGet();
+
+        setUser((old) => {
+            return {
+                name,
+                surname,
+                token: maybeSignedIn,
+                needsQuiz: !exists,
+            }
         });
     }, [surname, name, fathersName, day, month, year]);
 
@@ -122,7 +165,8 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             <p className={styles.title}>Введите ваши данные</p>
 
             <div className={styles.input_row}>
-                <InputAndLabel label={"Фамилия"} required={true} id={"surname"} placeholder={"Иванов"} text={surname}
+                <InputAndLabel label={"Фамилия (ID)"} required={true} id={"surname"} placeholder={"Иванов"}
+                               text={surname}
                                setText={setSurname} type={"text"}/>
                 <InputAndLabel label={"Имя"} text={name} setText={setName} id={"name"} placeholder={"Иван"}
                                required={true} type={"text"}/>

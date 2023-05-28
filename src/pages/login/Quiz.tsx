@@ -5,13 +5,18 @@ import styles from "./Quiz.module.css"
 import {InputQuestionElement, InputQuestionProps} from "./questions/InputQuestion";
 import {TableFieldQuestionElement, TableFieldQuestionElementProps} from "./questions/TableFieldQuestion";
 import {LoginInfo} from "../../App";
+import {UserService} from "../../openapi";
 
 async function sendQuiz(
     gender: string,
     address: string,
     activities: { name: string, value: number }[]
 ) {
-
+    UserService.updateUserApiV1UserUpdateUserPut({
+        address,
+        sex: gender,
+        survey_result: JSON.stringify(activities.map(el => el.value))
+    })
 }
 
 export default function Quiz(props: {
@@ -34,7 +39,7 @@ export default function Quiz(props: {
 
         const data = new FormData(event.currentTarget);
 
-        setGender(data.get("gender")! as string);
+        setGender((data.get("gender")! as string).startsWith("М") ? "Мужчина" : "Женщина");
         setQuestion(1);
     }, [setGender, setQuestion]);
 
