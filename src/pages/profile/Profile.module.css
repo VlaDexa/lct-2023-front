@@ -1,0 +1,33 @@
+.profile {
+    padding: 40px 100px 0;
+}
+
+.title_card {
+    background-color: var(--profile-title-bg-color);
+    background-image: url("/funny_profile_lines.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    padding: 90px 0;
+}
+
+.activity_title {
+    border-width: 4px 0;
+    border-style: solid;
+    border-color: var(--button-primary-bg-color);
+
+    padding: 14px 0;
+}
+
+.groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    margin-bottom: 24px;
+}

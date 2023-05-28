@@ -46,6 +46,8 @@
     --quiz-table-border-color: var(--primary-green);
     --quiz-table-even-bg-color: var(--secondary-green);
     --quiz-table-uneven-bg-color: transparent;
+
+    --profile-title-bg-color: var(--secondary-green);
 }
 
 * {
@@ -68,10 +70,22 @@ button:hover {
     text-decoration: underline;
 }
 
+h3 {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+}
+
 h2 {
     color: var(--primary-green);
     font-weight: 700;
     font-size: 32px;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
 }
 
 b {
@@ -98,12 +112,17 @@ b {
 
 .btn {
     border: 2px solid var(--button-primary-bg-color);
+    border-radius: 10px;
 }
 
 .btn_primary {
     background-color: var(--button-primary-bg-color);
     color: var(--button-primary-text-color);
-    border-radius: 10px;
+}
+
+.btn-secondary {
+    background-color: var(--button-secondary-bg-color);
+    color: var(--button-secondary-text-color);
 }
 
 body {

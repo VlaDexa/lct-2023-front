@@ -7,8 +7,13 @@ import Profile from "./pages/profile/Profile";
 import Help from "./pages/help/Help";
 import Quiz from "./pages/login/Quiz";
 
+type GroupId = string;
+
 export type LoginInfo = {
-    needsQuiz: boolean
+    needsQuiz: boolean,
+    name: string,
+    surname: string,
+    token: GroupId,
 };
 
 function needsQuiz(info: LoginInfo): boolean {
@@ -25,7 +30,7 @@ export default function App() {
                     <Routes>
                         <Route path={"/"} element={<AfterLogin user={loginInfo}/>}>
                             <Route index element={<Main/>}/>
-                            <Route path={"profile"} element={<Profile/>}/>
+                            <Route path={"profile"} element={<Profile login={loginInfo}/>}/>
                             <Route path={"help"} element={<Help/>}/>
                         </Route>
                     </Routes>
