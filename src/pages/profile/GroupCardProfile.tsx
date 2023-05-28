@@ -29,8 +29,8 @@ export default function GroupCardProfile(props: {
                         </h2>
                     </center>
 
-                    <div className={groupStyles.date_place}>
-                        <Clock/>
+                    <div className={groupStyles.date_place} aria-label={"Когда проводятся занятия"}>
+                        <Clock aria_hidden={true}/>
                         <div className={groupStyles.dates}>
                             {split_time.map(({day, time}) =>
                                 <p key={day} className={groupStyles.date}>
@@ -44,14 +44,14 @@ export default function GroupCardProfile(props: {
 
                     <div className={groupStyles.address_place}>
                         <div className={groupStyles.address_string}>
-                            <SmallMapMarker/>
-                            <p>{props.group.address}</p>
+                            <SmallMapMarker aria_hidden={true}/>
+                            <p aria-label={"Адрес группы"}>{props.group.address}</p>
                         </div>
                         <div className={groupStyles.metro_string}>
-                            <MetroMarker/>
-                            <p>{props.group.metro}</p>
-                            <p> &#9679;</p>
-                            <p>{props.group.timeToWalk} минут пешком</p>
+                            <MetroMarker aria_hidden={true}/>
+                            <p aria-label={"Метро"}>{props.group.metro}</p>
+                            <p aria-hidden={true}> &#9679;</p>
+                            <p aria-label={"Время от метро до группы"}>{props.group.timeToWalk} минут пешком</p>
                         </div>
                     </div>
 
