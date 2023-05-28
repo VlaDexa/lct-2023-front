@@ -167,7 +167,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
             </div>
         }
         <div className={styles.button_row}>
-            <button className={styles.more_button}>Подробнее</button>
+            {/*<button className={styles.more_button}>Подробнее</button>*/}
             <button className={styles.signup_button}>Записаться</button>
         </div>
     </div>

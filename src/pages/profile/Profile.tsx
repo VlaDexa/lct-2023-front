@@ -3,32 +3,43 @@ import {LoginInfo} from "../../App";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import GroupCardProfile from "./GroupCardProfile";
+import {GroupsService} from "../../openapi";
 
 export type PartialGroup = {
-    id: string,
+    id: number,
     name: string,
     address: string,
     metro: string,
-    timeToWalk: number,
-    time: string[]
+    // time: string[]
 }
 
 export default function Profile(props: { login: LoginInfo }) {
     const [groups, setGroups] = useState<PartialGroup[]>([]);
 
     useEffect(() => {
-        setGroups(
-            [
-                {
-                    id: "1",
-                    name: "3-D моделирование",
-                    address: "Карельский бульвар, дом 20",
-                    time: ["Понедельник  18:00 – 20:00"],
-                    metro: "Чертаново",
-                    timeToWalk: 17
+        GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet().then((groups): PartialGroup[] => {
+            return groups.map((group): PartialGroup => {
+                return {
+                    name: group.direction_3,
+                    id: group.id,
+                    metro: group.metro,
+                    address: group.address,
                 }
-            ]
-        )
+            })
+        }).then(setGroups);
+
+        // setGroups(
+        //     [
+        //         {
+        //             id: "1",
+        //             name: "3-D моделирование",
+        //             address: "Карельский бульвар, дом 20",
+        //             time: ["Понедельник  18:00 – 20:00"],
+        //             metro: "Чертаново",
+        //             timeToWalk: 17
+        //         }
+        //     ]
+        // )
     }, [])
 
     return <div className={styles.profile}>
@@ -43,7 +54,9 @@ export default function Profile(props: { login: LoginInfo }) {
         <span className={styles.groups}>
             {
                 groups.map(group =>
-                    <GroupCardProfile key={group.id} group={group}/>
+                    <GroupCardProfile key={group.id} group={group} onUnsubscribe={() => {
+                        GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id)
+                    }}/>
                 )
             }
         </span>

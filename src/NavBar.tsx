@@ -1,6 +1,4 @@
 import styles from "./NavBar.module.css";
-import {ReactComponent as CommentSquareNormal} from "./assets/icons/comment_square/normal.svg";
-import {ReactComponent as CommentSquareActive} from "./assets/icons/comment_square/active.svg";
 import {ReactComponent as PersonNormal} from "./assets/icons/person/normal.svg";
 import {ReactComponent as PersonActive} from "./assets/icons/person/active.svg";
 import {ReactComponent as HomeNormal} from "./assets/icons/home/normal.svg";
@@ -8,7 +6,6 @@ import {ReactComponent as HomeActive} from "./assets/icons/home/active.svg";
 import {ReactComponent as EyeNormal} from "./assets/icons/eye/normal.svg";
 import {ReactComponent as EyeActive} from "./assets/icons/eye/active.svg";
 import {FunctionComponent, KeyboardEvent, SVGProps, useCallback, useEffect, useState} from "react";
-import FontSizeChanger from "./FontSizeChanger";
 import {Link} from "react-router-dom";
 
 export enum NavState {
@@ -93,23 +90,24 @@ export default function NavBar(props: {forBlind: boolean, setForBlind: (blind: b
 
     return <nav className={styles.nav}>
         <div className={styles.align_start}>
-            <Link to={"/"}><LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive} isActive={navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText></Link>
+            <Link to={"/"}><LogoAndText normalSvg={HomeNormal} activeSvg={HomeActive}
+                                        isActive={navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText></Link>
             <Vr/>
             <Link to={"/profile"}>
                 <LogoAndText normalSvg={PersonNormal} activeSvg={PersonActive} isActive={navState === NavState.Profile}
                              onClick={setNavProfile}>Личный кабинет</LogoAndText>
             </Link>
-            <Vr/>
-            <Link to={"/help"}>
-                <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive}
-                             isActive={navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>
-            </Link>
+            {/*<Vr/>*/}
+            {/*<Link to={"/help"}>*/}
+            {/*    <LogoAndText normalSvg={CommentSquareNormal} activeSvg={CommentSquareActive}*/}
+            {/*                 isActive={navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>*/}
+            {/*</Link>*/}
         </div>
         <div className={styles.align_end}>
             <LogoAndText normalSvg={EyeNormal} activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}
                          tabIndex={0}>Для слабовидящих</LogoAndText>
-            <Vr/>
-            <FontSizeChanger makeItLarger={null!} makeItSmaller={null!}></FontSizeChanger>
+            {/*<Vr/>*/}
+            {/*<FontSizeChanger makeItLarger={null!} makeItSmaller={null!}></FontSizeChanger>*/}
         </div>
     </nav>
 }

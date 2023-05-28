@@ -1,7 +1,5 @@
 import styles from "./HorizontalButtons.module.css";
 import React, {useCallback, useState} from "react";
-import MapMarker from "./../../../assets/icons/map_marker.svg";
-import Star from "./../../../assets/icons/star.svg";
 import {Filters} from "../MainPage";
 
 export enum SelectedGroupType {
@@ -77,7 +75,7 @@ export default function HorizontalButtons(
 
     return <div className={classes.join(" ")}>
         <GroupTypePicker selectedType={props.selectedType} setSelectedType={props.setSelectedType}/>
-        <SelectButton icon={Star} onClick={clickRecs} active={props.recs}>Подобрано для меня</SelectButton>
-        <SelectButton icon={MapMarker} onClick={clickClose}>Близко ко мне</SelectButton>
+        {/*<SelectButton icon={Star} onClick={clickRecs} active={props.recs}>Подобрано для меня</SelectButton>*/}
+        {/*<SelectButton icon={MapMarker} onClick={clickClose}>Близко ко мне</SelectButton>*/}
     </div>
 }

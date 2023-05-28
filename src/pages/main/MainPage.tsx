@@ -12,13 +12,25 @@ export type Filters = {
     close: boolean
 }
 
-function Groups(props: {groups: Group[]}) {
+function Groups(props: { groups: Group[] }) {
     return <div className={styles.groups}>
         {props.groups.map((el, index) => <GroupCard key={el.id} group={el} index={index}/>)}
     </div>
 }
 
+function typeFilter(filters: Filters, groups: Group[]) {
+    if (filters.type === SelectedGroupType.Online) {
+        return groups.filter(group => group.metro === "Онлайн")
+    } else if (filters.type === SelectedGroupType.InPerson) {
+        return groups.filter(group => group.metro !== "Онлайн")
+    } else {
+        return groups;
+    }
+}
+
 function pageFilter(filters: Filters, groups: Group[]) {
+    groups = typeFilter(filters, groups);
+
     const AMOUNT_ON_PAGE = 6;
     return groups.slice(filters.page * AMOUNT_ON_PAGE, filters.page * AMOUNT_ON_PAGE + AMOUNT_ON_PAGE);
     // return groups;
