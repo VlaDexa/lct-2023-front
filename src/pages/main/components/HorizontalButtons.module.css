@@ -79,6 +79,15 @@
     background-color: var(--text-active);
 }
 
+.active {
+    color: white;
+    background-color: var(--text-active);
+}
+
+.active > img {
+    filter: brightness(0) invert(1);
+}
+
 .link_button:active > img {
     filter: brightness(0) invert(1);
 }

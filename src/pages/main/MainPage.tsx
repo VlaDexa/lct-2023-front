@@ -4,9 +4,11 @@ import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
 
-type Filters = {
+export type Filters = {
     type: SelectedGroupType,
-    page: number
+    page: number,
+    recs: boolean,
+    close: boolean
 }
 
 function Groups(props: {groups: Group[]}) {
@@ -123,13 +125,17 @@ export default function Main() {
     const [page, setPage] = useState(0);
     const [filters, setFilters] = useState<Filters>({
         type: selectedType,
-        page
+        page,
+        recs: true,
+        close: false
     });
 
     useEffect(() => {
-        setFilters({
-            type: selectedType,
-            page
+        setFilters((old) => {
+            return {
+                ...old,
+                type: selectedType,
+            }
         });
     }, [selectedType, page])
 
@@ -140,7 +146,7 @@ export default function Main() {
     return <>
         <Banner/>
         <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType}
-                           className={styles.spacing_left}/>
+                           className={styles.spacing_left} setFilters={setFilters} recs={true}/>
         <Groups groups={groups}/>
         <PageSwitcher page={page} setPage={setPage} maxPages={groups.length / 6}/>
     </>

@@ -1,4 +1,8 @@
 import styles from "./HorizontalButtons.module.css";
+import React, {useCallback, useState} from "react";
+import MapMarker from "./../../../assets/icons/map_marker.svg";
+import Star from "./../../../assets/icons/star.svg";
+import {Filters} from "../MainPage";
 
 export enum SelectedGroupType {
     All,
@@ -23,31 +27,57 @@ function GroupTypePicker(props: {
     </div>
 }
 
-// function LinkButton(props: {
-//     icon: string,
-//     children: string,
-//     onClick?: MouseEventHandler<HTMLButtonElement>
-// }) {
-//     return <button className={styles.link_button} onClick={props.onClick}>
-//         <img src={props.icon} alt={""}/>
-//         <p>{props.children}</p>
-//     </button>
-// }
+function SelectButton(props: {
+    icon: string,
+    children: string,
+    onClick?:
+        (event: React.MouseEvent<HTMLButtonElement>, isActive: boolean) => void,
+    active?: boolean
+}) {
+    const [pressed, setPressed] = useState(props.active || false);
+
+    return <button className={[styles.link_button, pressed ? styles.active : undefined].join(" ")} onClick={(event) => {
+        setPressed(old => !old);
+        props.onClick && props.onClick(event, pressed);
+    }}>
+        <img src={props.icon} alt={""}/>
+        <p>{props.children}</p>
+    </button>
+}
 
 export default function HorizontalButtons(
     props: {
         selectedType: SelectedGroupType,
         setSelectedType: (type: SelectedGroupType) => void,
-        className?: string
+        setFilters: React.Dispatch<React.SetStateAction<Filters>>
+        className?: string,
+        recs: boolean
     }
 ) {
     const classes = [styles.horizontal_row];
     if (props.className) {
         classes.push(props.className);
     }
+
+    const clickRecs = useCallback<((event: React.MouseEvent<HTMLButtonElement, MouseEvent>, isActive: boolean) => void)>((_, active) => {
+        props.setFilters(old => {
+                old.recs = active;
+                return {...old}
+            }
+        );
+    }, [props.setFilters]);
+
+    const clickClose = useCallback<((event: React.MouseEvent<HTMLButtonElement, MouseEvent>, isActive: boolean) => void)>((_, active) => {
+        props.setFilters(old => {
+                old.close = active;
+                return {...old}
+            }
+        );
+    }, [props.setFilters]);
+
     return <div className={classes.join(" ")}>
         <GroupTypePicker selectedType={props.selectedType} setSelectedType={props.setSelectedType}/>
-        {/*<LinkButton icon={MapMarker}>Карта мероприятий</LinkButton>*/}
-        {/*<LinkButton icon={Calendar}>Календарь мероприятий</LinkButton>*/}
+        <SelectButton icon={Star} onClick={clickRecs} active={props.recs}>Подобрано для меня</SelectButton>
+        <SelectButton icon={MapMarker} onClick={clickClose}>Близко ко мне</SelectButton>
     </div>
 }
