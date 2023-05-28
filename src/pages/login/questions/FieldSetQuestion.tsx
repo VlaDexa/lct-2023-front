@@ -13,7 +13,9 @@ export const FieldSetQuestionElement: QuestionElement<string, FieldSetQuestionEl
                 <label key={option} style={{display: "flex", flexDirection: "row"}}>
                     <input type="radio" name={props.answerName} value={option}
                            className={["checkbox_like_radio", styles.input].join(" ")}
-                           onChange={() => props.setShouldUnblock(true)}/>
+                           onChange={() => props.setShouldUnblock(true)}
+                           required={true}
+                    />
                     <span style={{placeSelf: "center"}}>{option}</span>
                 </label>
             ))}

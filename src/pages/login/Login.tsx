@@ -2,7 +2,7 @@ import styles from "./Login.module.css"
 import {LoginInfo} from "../../App";
 import Lines from "../../assets/login_lines.svg";
 import Flower from "../../assets/mini_flower.svg";
-import {
+import React, {
     ChangeEventHandler,
     FormEventHandler,
     HTMLInputTypeAttribute,
@@ -36,7 +36,7 @@ function InputAndLabel({setText, text, id, label, placeholder, required, type, m
     </div>
 }
 
-export default function Login({setUser}: { setUser: (info: LoginInfo) => unknown }) {
+export default function Login({setUser}: { setUser: React.Dispatch<React.SetStateAction<LoginInfo | undefined>> }) {
     const [surname, setSurname] = useState<string>("");
     const [name, setName] = useState<string>("");
     const [fathersName, setFathersName] = useState<string>("");
@@ -102,7 +102,9 @@ export default function Login({setUser}: { setUser: (info: LoginInfo) => unknown
             return;
         }
 
-        setUser({});
+        setUser({
+            needsQuiz: true,
+        });
     }, [surname, name, fathersName, day, month, year]);
 
     const MonthsList = useMemo(() => {

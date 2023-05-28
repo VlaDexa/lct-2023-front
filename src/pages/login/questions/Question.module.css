@@ -15,9 +15,10 @@
 }
 
 .title {
-    margin-top: 0;
     justify-self: center;
     align-self: center;
+
+    margin: 0 115px;
 }
 
 .step {
@@ -26,7 +27,7 @@
 }
 
 .button_row {
-    margin: 32px 42px;
+    margin: 32px 76px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -92,4 +93,26 @@
     gap: 16px;
 
     padding-top: 0;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table_row {
+    border: 2px solid var(--quiz-table-border-color);
+    background-color: var(--quiz-table-even-bg-color);
+}
+
+.table_row:first-of-type {
+    border-radius: 10px 10px 0 0;
+}
+
+.table_row:nth-of-type(even) {
+    background-color: var(--quiz-table-uneven-bg-color);
+}
+
+.table_cell {
+    text-align: center;
+    vertical-align: middle;
 }

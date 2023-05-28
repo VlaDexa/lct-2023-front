@@ -46,12 +46,16 @@
 
     padding: 15px 0;
 
-    margin: 0 40px;
+    margin: 32px 76px 0;
 }
 
 .input_question::placeholder {
     color: var(--placeholder-color);
     place-self: center;
 
-    margin: 15px 0;
+    margin: 76px 0;
+}
+
+.table_question {
+    margin: 32px 76px 0;
 }

@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {useState} from "react";
 import Login from "./pages/login/Login";
 import AfterLogin from "./AfterLogin";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -7,17 +7,16 @@ import Profile from "./pages/profile/Profile";
 import Help from "./pages/help/Help";
 import Quiz from "./pages/login/Quiz";
 
-export type LoginInfo = {};
+export type LoginInfo = {
+    needsQuiz: boolean
+};
 
-function needsQuiz(_info: LoginInfo): boolean {
-    return true;
+function needsQuiz(info: LoginInfo): boolean {
+    return info.needsQuiz;
 }
 
 export default function App() {
     const [loginInfo, setLoginInfo] = useState<LoginInfo>();
-    const setUser = useCallback((userInfo: LoginInfo) => {
-        setLoginInfo(userInfo)
-    }, [setLoginInfo]);
 
     if (loginInfo) {
         if (!needsQuiz(loginInfo)) {
@@ -32,9 +31,9 @@ export default function App() {
                     </Routes>
                 </BrowserRouter>);
         } else {
-            return <Quiz/>
+            return <Quiz setUser={setLoginInfo}/>
         }
     } else {
-        return <Login setUser={setUser}></Login>
+        return <Login setUser={setLoginInfo}></Login>
     }
 }

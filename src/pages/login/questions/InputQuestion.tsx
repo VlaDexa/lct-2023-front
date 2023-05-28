@@ -52,6 +52,7 @@ export const InputQuestionElement: QuestionElement<string, InputQuestionProps> =
             onInput={handleInputChange}
             placeholder={props.placeholder}
             name={props.inputName}
+            required={true}
         />
     );
 };
