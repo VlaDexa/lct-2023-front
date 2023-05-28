@@ -72,6 +72,14 @@
     z-index: 2;
 }
 
+.new_starperi {
+    position: absolute;
+    height: 343px;
+    right: 0;
+    margin-top: 22px;
+    z-index: 2;
+}
+
 .how_does_it_work {
     font-size: var(--normal-font);
     line-height: 22px;
