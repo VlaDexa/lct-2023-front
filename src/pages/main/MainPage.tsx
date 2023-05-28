@@ -30,12 +30,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
         timeToWalk: 17,
         metro: "Чертаново",
         address: "Карельский бульвар, дом 20",
-        tags: [
-            "для эрудиции",
-            "для общения",
-            "для любопытных"
-        ],
-        type: GroupType.Intellectual,
+        type: GroupType.Education,
         name: "3-D моделирование"
     },
         {
@@ -44,12 +39,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
-            tags: [
-                "для эрудиции",
-                "для общения",
-                "для любопытных"
-            ],
-            type: GroupType.Intellectual,
+            type: GroupType.Education,
             name: "3-D моделирование"
         },
         {
@@ -58,12 +48,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
-            tags: [
-                "для эрудиции",
-                "для общения",
-                "для любопытных"
-            ],
-            type: GroupType.Intellectual,
+            type: GroupType.Education,
             name: "3-D моделирование"
         },
         {
@@ -72,12 +57,7 @@ async function getGroups(filters: Filters): Promise<Group[]> {
             timeToWalk: 17,
             metro: "Чертаново",
             address: "Карельский бульвар, дом 20",
-            tags: [
-                "для эрудиции",
-                "для общения",
-                "для любопытных"
-            ],
-            type: GroupType.Intellectual,
+            type: GroupType.Education,
             name: "3-D моделирование"
         },
     ]));

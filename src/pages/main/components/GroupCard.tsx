@@ -39,17 +39,35 @@ export function Clock(props: { aria_hidden?: boolean }) {
 }
 
 export enum GroupType {
-    Game,
-    Education,
-    Singing,
-    Painting,
-    Intellectual,
-    Theatre,
-    SilverUni,
-    Trainings,
-    Dancing,
-    Creativity,
-    Physical
+    Game = 'игры',
+    Education = 'образование',
+    Singing = 'пение',
+    Painting = 'рисование',
+    Intellectual = 'интеллектуальный клуб',
+    Theatre = 'московский театрал (актёрское мастерство)',
+    SilverUni = 'серебряный университет',
+    Trainings = 'тренировки долголетия (мед. реабилитация)',
+    Dancing = 'танцы',
+    Creativity = 'творчество',
+    Physical = 'физическая активность'
+}
+
+function getTags(type: GroupType): string[] {
+    const tags = new Map([
+        ['игры', ['для общения', 'для концентрация', 'для настроения']],
+        ['образование', ['для эрудиции', 'для общения', 'для любопытных']],
+        ['пение', ['против стресса', 'для настроения', 'улучшение дыхания', 'для вдохновения']],
+        ['рисование', ['для спокойствия', 'для вдохновения', 'для внимания']],
+        ['интеллектуальный клуб', ['для эрудиции', 'для общения', 'для любопытных']],
+        ['московский театрал (актёрское мастерство)', ['против тревоги', 'для памяти', 'для уверенности в себе', 'для общения', 'для вдохновения']],
+        ['серебряный университет', ['для получения новой профессии', 'для эрудиции']],
+        ['тренировки долголетия (мед. реабилитация)', ['для здоровья', 'против стресса']],
+        ['танцы', ['улучшение координации', 'для памяти', 'против стресса', 'для уверенности в себе', 'для общения']],
+        ['творчество', ['против тревожности', 'для настроения', 'для координации', 'для памяти', 'для общения']],
+        ['физическая активность', ['против стресса', 'для здоровья', 'для координации', 'для общения']]
+    ]);
+
+    return tags.get(type)!;
 }
 
 function chooseYourBabushka(type: GroupType) {
@@ -83,7 +101,6 @@ export type Group = {
     id: string,
     name: string,
     type: GroupType,
-    tags: [string, string, string],
     address: string
     metro: string,
     timeToWalk: number,
@@ -101,11 +118,13 @@ export default function GroupCard(props: { group: Group, index: number }) {
         }
     });
 
+    const tags = getTags(props.group.type);
+
     return <div className={styles.group_card}>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
         <p className={styles.title}>{props.group.name}</p>
         <div className={styles.tag_line}>
-            {props.group.tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
+            {tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
         </div>
         <p className={styles.index}>№{props.index + 1} в вашем рейтинге</p>
         <div className={styles.date_place}>
