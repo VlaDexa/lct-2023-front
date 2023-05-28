@@ -10,12 +10,6 @@
     gap: 20px
 }
 
-@media screen and (min-width: 1400px) {
-    .groups {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
 @media screen and (max-width: 1050px) {
     .groups {
        grid-template-columns: 1fr;
