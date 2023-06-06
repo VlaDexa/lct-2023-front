@@ -128,9 +128,12 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             dayN
         );
 
+        const username = surname;
+        const password = date_of_birth.toISOString().slice(0, "YYYY-MM-DD".length);
+
         const login_data = {
-            password: `${year}-${i}-${day}`,
-            username: surname,
+            username,
+            password
         };
 
         const maybeSignedIn = await UserService.createUserApiV1UserCreateUserPost({
