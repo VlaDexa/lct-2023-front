@@ -98,7 +98,7 @@ export default function Quiz(props: {
         props.setQuizAnswers({
             gender,
             address,
-            activities
+            activities: activities_arr
         });
         // props.setUser((old) => {
         //     old!.needsQuiz = false;
