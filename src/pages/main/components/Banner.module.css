@@ -37,6 +37,8 @@
     color: var(--text-active);
     border: 1px solid #FFFFFF;
     border-radius: 10px 10px 0 10px;
+
+    font: inherit;
 }
 
 .inverse_color_text_lower {
@@ -44,6 +46,8 @@
     color: var(--text-active);
     border: 1px solid #FFFFFF;
     border-radius: 0 10px 10px 10px;
+
+    font: inherit;
 }
 
 .big_text {
@@ -76,7 +80,7 @@
     position: absolute;
     height: 343px;
     right: 0;
-    margin-top: 22px;
+    margin-top: 23px;
     z-index: 2;
 }
 

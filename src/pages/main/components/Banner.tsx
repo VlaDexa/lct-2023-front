@@ -4,13 +4,11 @@ import styles from "./Banner.module.css"
 
 export default function Banner() {
     return <div className={[styles.banner, styles.flex_row].join(" ")}>
-        <div className={[styles.flex_column, styles.banner_flavour_text].join(" ")}>
-            <div className={styles.flex_row}><p className={styles.big_text}>Эти&nbsp;</p><p
-                className={[styles.inverse_color_text_upper, styles.big_text].join(" ")}>&nbsp;мероприятия&nbsp;</p>
-            </div>
-            <div className={styles.flex_row}><p className={styles.big_text}>могут Вас&nbsp;</p><p
-                className={[styles.inverse_color_text_lower, styles.big_text].join(" ")}>&nbsp;заинтересовать!&nbsp;</p>
-            </div>
+        <div className={[styles.banner_flavour_text].join(" ")}>
+            <h1>
+                Эти <span className={styles.inverse_color_text_upper}>мероприятия</span><br/>
+                могут Вас <span className={styles.inverse_color_text_lower}>заинтересовать!</span>
+            </h1>
             {/*<p className={styles.how_does_it_work}>Как это работает?</p>*/}
             {/*<SearchBar/>*/}
         </div>
