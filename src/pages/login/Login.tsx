@@ -1,5 +1,4 @@
 import styles from "./Login.module.css"
-import {LoginInfo} from "../../App";
 import Lines from "../../assets/login_lines.svg";
 import Flower from "../../assets/mini_flower.svg";
 import React, {
@@ -12,6 +11,7 @@ import React, {
     useState
 } from "react";
 import {ApiError, OpenAPI, RecsService, UserService} from "../../openapi";
+import LoginInfo from "../../LoginInfo";
 
 function InputAndLabel({setText, text, id, label, placeholder, required, type, max, min, list, onInput}: {
     label: string,
@@ -48,7 +48,6 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
 
     const [error, setError] = useState<string>("");
     const [dateError, setDateError] = useState<string>("");
-
 
     useEffect(() => setError(""), [name, surname]);
     useEffect(() => setDateError(""), [day, month, year]);
@@ -142,12 +141,12 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         const exists = await RecsService.isExistRecsApiV1RecsIsExistGet();
 
         setUser(() => {
-            return {
+            return new LoginInfo(
+                !exists,
                 name,
                 surname,
-                token: maybeSignedIn,
-                needsQuiz: !exists,
-            }
+                maybeSignedIn,
+            )
         });
     }, [surname, name, fathersName, day, month, year]);
 

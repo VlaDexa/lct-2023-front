@@ -1,9 +1,9 @@
 import styles from "./Profile.module.css";
-import {LoginInfo} from "../../App";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import GroupCardProfile from "./GroupCardProfile";
 import {GroupsService} from "../../openapi";
+import LoginInfo from "../../LoginInfo";
 
 export type PartialGroup = {
     id: number,

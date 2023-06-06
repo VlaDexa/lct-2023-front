@@ -4,23 +4,15 @@ import React, {useCallback, useState} from "react";
 import styles from "./Quiz.module.css"
 import {InputQuestionElement, InputQuestionProps} from "./questions/InputQuestion";
 import {TableFieldQuestionElement, TableFieldQuestionElementProps} from "./questions/TableFieldQuestion";
-import {LoginInfo} from "../../App";
-import {UserService} from "../../openapi";
 
-async function sendQuiz(
-    gender: string,
-    address: string,
-    activities: { name: string, value: number }[]
-) {
-    UserService.updateUserApiV1UserUpdateUserPut({
-        address,
-        sex: gender,
-        survey_result: JSON.stringify(activities.map(el => el.value))
-    })
-}
+type Activity = { name: string, value: number }
 
 export default function Quiz(props: {
-    setUser: React.Dispatch<React.SetStateAction<LoginInfo | undefined>>
+    setQuizAnswers: (answers: {
+        gender: string,
+        address: string,
+        activities: Activity[]
+    }) => void,
 }) {
     const maxSteps = 3;
 
@@ -102,11 +94,16 @@ export default function Quiz(props: {
         }
 
         setActivities(activities_arr);
-        sendQuiz(gender, address, activities_arr);
-        props.setUser((old) => {
-            old!.needsQuiz = false;
-            return {...old!};
-        })
+        // sendQuiz(gender, address, activities_arr);
+        props.setQuizAnswers({
+            gender,
+            address,
+            activities
+        });
+        // props.setUser((old) => {
+        //     old!.needsQuiz = false;
+        //     return old;
+        // })
     }, [setActivities, setQuestion, things]);
 
 
