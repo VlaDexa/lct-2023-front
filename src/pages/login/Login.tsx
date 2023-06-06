@@ -75,6 +75,10 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
     const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(async (event) => {
         event.preventDefault();
 
+        const yearN = Number(year);
+        const dayN = Number(day);
+        const monthN = months.get(month);
+
         if (surname === "") {
             setError("Вы пропустили пункт фамилия");
             return;
@@ -90,23 +94,23 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         else if (month === "") {
             setDateError("Вы пропустили пункт месяц");
             return;
-        } else if (!monthNames.includes(month)) {
+        } else if (!monthN) {
             setDateError("Пожалуйста, выберите месяц из списка");
             return;
         } else if (day === "") {
             setDateError("Вы пропустили пункт день");
             return;
-        } else if (Number(day) < 1) {
+        } else if (dayN < 1) {
             setDateError("День не может быть меньше 0");
             return;
-        } else if (months.get(month)! < Number(day)) {
+        } else if (monthN < dayN) {
             const maxDay = months.get(month)!;
             setDateError(`В месяце ${month} всего ${maxDay} дней`);
             return;
         } else if (year === "") {
             setDateError("Вы пропустили пункт год")
             return;
-        } else if (Number(year) > thisYear) {
+        } else if (yearN > thisYear) {
             setDateError(`Вы не могли родиться после ${thisYear} года`)
             return;
         }
@@ -116,6 +120,13 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             if (key_month === month) break;
             i++;
         }
+
+        const date_of_birth = new Date();
+        date_of_birth.setFullYear(
+            yearN,
+            monthN,
+            dayN
+        );
 
         const login_data = {
             password: `${year}-${i}-${day}`,
@@ -131,12 +142,9 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
                 throw error;
             }).then(() => UserService.loginForTokenApiV1UserTokenPost(login_data)).then(token => token.access_token);
 
-        // OpenAPI.PASSWORD = login_data.password;
-        // OpenAPI.USERNAME = login_data.username;
         OpenAPI.HEADERS = {
             "Authorization": `Bearer ${maybeSignedIn}`
         }
-        // OpenAPI.WITH_CREDENTIALS
 
         const exists = await RecsService.isExistRecsApiV1RecsIsExistGet();
 
@@ -146,6 +154,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
                 name,
                 surname,
                 maybeSignedIn,
+                date_of_birth,
             )
         });
     }, [surname, name, fathersName, day, month, year]);

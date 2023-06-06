@@ -1,9 +1,10 @@
 import Banner from "./components/Banner";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import styles from "./MainPage.module.css";
 import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButtons";
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
-import {GroupsService, RecsService} from "../../openapi";
+import {ApiError, GroupsService, RecsService} from "../../openapi";
+import {LoginContext} from "../../AfterLogin";
 
 export type Filters = {
     type: SelectedGroupType,
@@ -43,7 +44,9 @@ async function getGroups(): Promise<Group[]> {
         await RecsService.giveRecsApiV1RecsGet() :
         await RecsService.giveRecsForNewUsersApiV1RecsNewPost();
 
-    const groups: Group[] = (await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums)).map(group => {
+    const groups: Group[] = (
+        await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums)
+    ).map(group => {
         return {
             type: group.type.toLowerCase() as GroupType,
             name: group.name,
@@ -103,6 +106,8 @@ export default function Main() {
         close: false
     });
 
+    const loginInfo = useContext(LoginContext);
+
     useEffect(() => {
         setFilters((old) => {
             return {
@@ -114,8 +119,11 @@ export default function Main() {
     }, [selectedType, page])
 
     useEffect(() => {
-        getGroups().then(setGroups);
-    }, []);
+        getGroups().catch(error => {
+            if (!(error instanceof ApiError && error.status === 401)) throw error
+            return loginInfo.resetToken().then(getGroups);
+        }).then(setGroups);
+    }, [loginInfo]);
 
     useEffect(() => {
         setShownGroups(pageFilter(filters, groups));

@@ -1,16 +1,20 @@
 import NavBar from "./NavBar";
-import {useState} from "react";
+import {createContext, useState} from "react";
 import {Outlet} from "react-router-dom";
 import Footer from "./Footer";
 import LoginInfo from "./LoginInfo";
 
-export default function AfterLogin(props: {user: LoginInfo}) {
+export const LoginContext = createContext<LoginInfo>(null!);
+
+export default function AfterLogin(props: { user: LoginInfo }) {
     const [blind, setBlind] = useState(false);
 
     return <div>
         <NavBar forBlind={blind} setForBlind={setBlind}/>
         <main>
-            <Outlet/>
+            <LoginContext.Provider value={props.user}>
+                <Outlet/>
+            </LoginContext.Provider>
         </main>
         <Footer/>
     </div>;
