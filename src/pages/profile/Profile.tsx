@@ -1,9 +1,10 @@
 import styles from "./Profile.module.css";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import GroupCardProfile from "./GroupCardProfile";
-import {GroupsService} from "../../openapi";
+import {ApiError, GroupsService} from "../../openapi";
 import LoginInfo from "../../LoginInfo";
+import {LoginContext} from "../../AfterLogin";
 
 export type PartialGroup = {
     id: number,
@@ -14,10 +15,15 @@ export type PartialGroup = {
 }
 
 export default function Profile(props: { login: LoginInfo }) {
+    const loginInfo = useContext(LoginContext);
     const [groups, setGroups] = useState<PartialGroup[]>([]);
 
     useEffect(() => {
-        GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet().then((groups): PartialGroup[] => {
+        GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet().catch((error) => {
+            if (!(error instanceof ApiError && error.status === 401)) throw error;
+
+            return loginInfo.resetToken().then(GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet);
+        }).then((groups): PartialGroup[] => {
             return groups.map((group): PartialGroup => {
                 return {
                     name: group.direction_3,
