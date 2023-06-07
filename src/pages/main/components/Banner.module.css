@@ -39,6 +39,9 @@
     border-radius: 10px 10px 0 10px;
 
     font: inherit;
+
+    padding: 5px;
+    margin-left: 5px;
 }
 
 .inverse_color_text_lower {
@@ -48,6 +51,9 @@
     border-radius: 0 10px 10px 10px;
 
     font: inherit;
+
+    padding: 5px;
+    margin-left: 5px;
 }
 
 .big_text {
