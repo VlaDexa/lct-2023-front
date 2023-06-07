@@ -45,6 +45,7 @@
 
 .active {
     color: var(--text-active) !important;
+    text-decoration: underline;
 }
 
 .align_end {
