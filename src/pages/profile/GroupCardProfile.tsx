@@ -1,6 +1,7 @@
 import styles from "./GroupCardProfile.module.css";
-import groupStyles from "../main/components/GroupCard.module.css";
-import {SmallMapMarker} from "../main/components/GroupCard";
+import Clock from "../../assets/icons/clock.svg";
+import MapMarker from "../../assets/icons/map_marker.svg";
+import Metro from "../../assets/icons/metro.svg";
 import {PartialGroup} from "./Profile";
 import React from "react";
 
@@ -29,34 +30,37 @@ export default function GroupCardProfile(props: {
                         </h2>
                     </center>
 
-                    {/*<div className={groupStyles.date_place} aria-label={"Когда проводятся занятия"}>*/}
-                    {/*    <Clock aria_hidden={true}/>*/}
-                    {/*    <div className={groupStyles.dates}>*/}
-                    {/*        {split_time.map(({day, time}) =>*/}
-                    {/*            <p key={day} className={groupStyles.date}>*/}
-                    {/*                <b>{day}</b>*/}
-                    {/*                &nbsp;*/}
-                    {/*                {time}*/}
-                    {/*            </p>*/}
-                    {/*        )}*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-
-                    <div className={groupStyles.address_place}>
-                        <div className={groupStyles.address_string}>
-                            <SmallMapMarker aria_hidden={true}/>
-                            <p aria-label={"Адрес группы"}>{props.group.address}</p>
+                    <div className={styles.info}>
+                        <div className={styles.time}>
+                            <img src={Clock} alt={""} className={"filter_to_primary_green"}
+                                 style={{width: 17, height: 17}}/>
+                            <ul className={styles.time_list}>
+                                {props.group.time.map(time => <li key={time}>{time}</li>)}
+                            </ul>
+                        </div>
+                        <div className={styles.address_and_metro}>
+                            <div className={styles.address}>
+                                <img src={MapMarker} alt={""} className={"filter_to_primary_green"}
+                                     style={{width: 16, height: 22}}/>
+                                <span>{props.group.online ? "Онлайн" : props.group.address}</span>
+                            </div>
+                            {props.group.online ? undefined : <div className={styles.metro}>
+                                <img src={Metro} alt={""} className={"filter_to_primary_green"}/>
+                                <div className={styles.metro_inner}>
+                                    <span><b>{props.group.metro}</b></span>
+                                    <span>&#9679;</span>
+                                    <span><b>{props.group.timeToWalk} минут пешком</b></span>
+                                </div>
+                            </div>}
                         </div>
                     </div>
 
-                    <center className={styles.deny}>
-                        <button className={"btn btn-secondary"}
-                                onClick={event => props.onUnsubscribe && props.onUnsubscribe(event, props.group)}>
-                            <span>
-                                Отказаться от занятий
-                            </span>
-                        </button>
-                    </center>
+                    <button className={`btn btn-secondary ${styles.deny}`}
+                            onClick={event => props.onUnsubscribe && props.onUnsubscribe(event, props.group)}>
+                        <h4>
+                            Отказаться от занятий
+                        </h4>
+                    </button>
                 </div>
             </div>
         </div>

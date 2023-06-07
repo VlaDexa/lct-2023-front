@@ -26,8 +26,9 @@
 
 .groups {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 24px;
+    column-gap: 16px;
 
     margin-bottom: 24px;
 }

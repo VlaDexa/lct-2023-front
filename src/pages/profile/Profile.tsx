@@ -11,7 +11,9 @@ export type PartialGroup = {
     name: string,
     address: string,
     metro: string,
-    // time: string[]
+    time: string[],
+    timeToWalk: string,
+    online: boolean
 }
 
 export default function Profile(props: { login: LoginInfo }) {
@@ -29,7 +31,10 @@ export default function Profile(props: { login: LoginInfo }) {
                     name: group.direction_3,
                     id: group.id,
                     metro: group.metro,
+                    timeToWalk: group.end,
                     address: group.address,
+                    time: group.start.split("; "),
+                    online: !group.Offline
                 }
             })
         }).then(setGroups);
@@ -47,7 +52,7 @@ export default function Profile(props: { login: LoginInfo }) {
         //     ]
         // )
     }, [])
-
+    console.log(groups);
     return <div className={styles.profile}>
         <h1 className={styles.title_card}>{`Здраствуйте, ${props.login.name ?? "Зоя"} ${props.login.surname ?? "Николаевна"}`}</h1>
 
@@ -61,7 +66,19 @@ export default function Profile(props: { login: LoginInfo }) {
             {
                 groups.map(group =>
                     <GroupCardProfile key={group.id} group={group} onUnsubscribe={() => {
-                        GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id)
+                        GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id);
+                        setGroups((old) => {
+                            let i = 0;
+
+                            for (const oldGroup of old) {
+                                if (oldGroup.id === group.id) break;
+                                i++;
+                            }
+
+                            old.splice(i, 1);
+
+                            return [...old];
+                        })
                     }}/>
                 )
             }

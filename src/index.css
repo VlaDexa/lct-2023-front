@@ -64,6 +64,14 @@ body[data-blind="false"] {
     --normal-font: 16px;
 }
 
+body[data-blind="true"] .filter_to_primary_green {
+    filter: brightness(0) saturate(100%) invert(24%) sepia(69%) saturate(1513%) hue-rotate(128deg) brightness(93%) contrast(101%);
+}
+
+body[data-blind="false"] .filter_to_primary_green {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(90%) saturate(3814%) hue-rotate(153deg) brightness(92%) contrast(102%);
+}
+
 * {
     font-family: 'Golos Text', serif;
     font-style: normal;
@@ -82,6 +90,12 @@ button:disabled {
 
 button:hover {
     text-decoration: underline;
+}
+
+h4 {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 h3 {
@@ -135,8 +149,14 @@ b {
     color: var(--button-primary-text-color);
 }
 
-.btn-secondary {
+body[data-blind="true"] .btn-secondary {
     background-color: var(--button-secondary-bg-color);
+    color: var(--button-secondary-text-color);
+}
+
+body[data-blind="false"] .btn-secondary {
+    border: none;
+    background-color: var(--primary-white);
     color: var(--button-secondary-text-color);
 }
 
