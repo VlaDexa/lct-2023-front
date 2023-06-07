@@ -52,9 +52,9 @@ export default function GroupCardProfile(props: {
                     <center className={styles.deny}>
                         <button className={"btn btn-secondary"}
                                 onClick={event => props.onUnsubscribe && props.onUnsubscribe(event, props.group)}>
-                            <h3>
+                            <span>
                                 Отказаться от занятий
-                            </h3>
+                            </span>
                         </button>
                     </center>
                 </div>

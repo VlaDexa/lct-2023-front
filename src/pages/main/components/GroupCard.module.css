@@ -1,10 +1,17 @@
 .group_card {
     background: #F6F6F6;
-    border: 2px solid var(--text-active);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     height: fit-content;
+}
+
+body[data-blind="true"] .group_card {
+    outline: 2px solid var(--text-active);
+}
+
+body[data-blind="false"] .group_card {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
 .preview {
@@ -14,15 +21,11 @@
 }
 
 .title {
-    font-weight: 700;
-    font-size: calc(var(--normal-font) * 2);
-    line-height: 38px;
+    color: #006739;
+
     margin-top: 24px;
-    color: var(--text-active);
     margin-left: 28px;
     margin-bottom: 0;
-
-    font-style: normal;
 }
 
 .tag_line {

@@ -1,13 +1,4 @@
-:root {
-    --primary-green: #006739;
-    --primary-white: #F6F6F6;
-    --primary-black: #151516;
-    --secondary-green: #97DFBF;
-    --primary-red: #CC2222;
-    --secondary-red: #FFACAC;
-    --slightly-shaded-white: #F6F6F6;
-    --white: #FFFFFF;
-
+body {
     --page-height-figma: 1024px;
     --page-width-figma: 1400px;
 
@@ -15,7 +6,6 @@
 
     --text-inactive: var(--primary-black);
     --text-active: var(--primary-green);
-    --normal-font: 16px;
     --big-banner-font: 40px;
     --placeholder-color: #494949;
     --mint: var(--secondary-green);
@@ -51,7 +41,27 @@
 }
 
 body[data-blind="true"] {
-    filter: saturate(0);
+    --primary-green: #006739;
+    --primary-white: #F6F6F6;
+    --primary-black: #151516;
+    --secondary-green: #97DFBF;
+    --primary-red: #CC2222;
+    --secondary-red: #FFACAC;
+    --slightly-shaded-white: #F6F6F6;
+    --white: #FFFFFF;
+    --normal-font: 18px;
+}
+
+body[data-blind="false"] {
+    --primary-green: #008044;
+    --primary-white: #F6F6F6;
+    --primary-black: #151516;
+    --secondary-green: #97DFBF;
+    --primary-red: #CC2222;
+    --secondary-red: #FFACAC;
+    --slightly-shaded-white: #F6F6F6;
+    --white: #FFFFFF;
+    --normal-font: 16px;
 }
 
 * {
@@ -75,9 +85,10 @@ button:hover {
 }
 
 h3 {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 26px;
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
 }
 
 h2 {

@@ -129,7 +129,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
 
     return <div className={styles.group_card}>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
-        <p className={styles.title}>{props.group.name}</p>
+        <h3 className={styles.title}>{props.group.name}</h3>
         <div className={styles.tag_line}>
             {tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
         </div>
@@ -162,7 +162,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
             <div className={styles.address_place}>
                 <div className={styles.address_string}>
                     <SmallMapMarker/>
-                    <h3>{props.group.metro}</h3>
+                    <span>{props.group.metro}</span>
                 </div>
             </div>
         }
