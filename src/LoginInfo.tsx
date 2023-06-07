@@ -1,4 +1,4 @@
-import {ApiError, OpenAPI, UserService} from "./openapi";
+import {OpenAPI, UserService} from "./openapi";
 
 export default class LoginInfo {
     // @ts-ignore: Set via setter
@@ -105,13 +105,6 @@ export default class LoginInfo {
 
     public async resetToken() {
         const loginData = this.toLoginData();
-        this.token = await UserService.createUserApiV1UserCreateUserPost({
-            name: loginData.username,
-            birthday_date: loginData.password
-        })
-            .catch((error) => {
-                if (error instanceof ApiError && error.status == 409) return;
-                throw error;
-            }).then(() => UserService.loginForTokenApiV1UserTokenPost(loginData)).then(token => token.access_token);
+        this.token = await UserService.loginForTokenApiV1UserTokenPost(loginData).then(token => token.access_token);
     }
 }
