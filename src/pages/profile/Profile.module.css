@@ -26,9 +26,21 @@
 
 .groups {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+
     row-gap: 24px;
     column-gap: 16px;
 
     margin-bottom: 24px;
+}
+
+@media screen and (min-width: 1155px) {
+    .groups {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 1640px) {
+    .groups {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }

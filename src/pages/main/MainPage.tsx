@@ -54,7 +54,7 @@ async function getGroups(): Promise<Group[]> {
             metro: group.metro!,
             timeToWalk: group.timeToWalk,
             id: group.id.toString(),
-            time: Array.isArray(group.time) ? group.time : group.time.split(";")
+            time: Array.isArray(group.time) ? group.time : group.time.split("; ")
         }
     });
     return groups;

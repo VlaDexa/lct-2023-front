@@ -4,6 +4,8 @@ import MapMarker from "../../assets/icons/map_marker.svg";
 import Metro from "../../assets/icons/metro.svg";
 import {PartialGroup} from "./Profile";
 import React from "react";
+import Days from "../../DateFormatter";
+import {deduplicate} from "../main/components/GroupCard";
 
 export default function GroupCardProfile(props: {
     group: PartialGroup,
@@ -18,6 +20,7 @@ export default function GroupCardProfile(props: {
     //         time: timetime
     //     }
     // });
+    const formattedTime = deduplicate(props.group.time.flatMap(time => new Days(time).days), (item) => item.day);
 
     return (
         <div className={styles.card_outer}>
@@ -25,9 +28,9 @@ export default function GroupCardProfile(props: {
                 <div className={styles.card}>
 
                     <center>
-                        <h2>
+                        <h3 style={{color: "var(--text-active)"}}>
                             {props.group.name}
-                        </h2>
+                        </h3>
                     </center>
 
                     <div className={styles.info}>
@@ -35,7 +38,9 @@ export default function GroupCardProfile(props: {
                             <img src={Clock} alt={""} className={"filter_to_primary_green"}
                                  style={{width: 17, height: 17}}/>
                             <ul className={styles.time_list}>
-                                {props.group.time.map(time => <li key={time}>{time}</li>)}
+                                {formattedTime.map(time => <li key={time.day}>
+                                    {time.toJSX()}
+                                </li>)}
                             </ul>
                         </div>
                         <div className={styles.address_and_metro}>

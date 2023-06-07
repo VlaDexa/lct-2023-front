@@ -12,6 +12,7 @@ import BoatBabushki from "/boat_babushki.png";
 import IntellectualTour from "/intellectual_tour.png";
 import {useCallback} from "react";
 import {GroupsService} from "../../../openapi";
+import Days from "../../../DateFormatter";
 
 export function SmallMapMarker(props: { aria_hidden?: boolean }) {
     return <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -109,23 +110,27 @@ export type Group = {
     time: string[],
 }
 
-export default function GroupCard(props: { group: Group, index: number }) {
-    const split_time = props.group.time.map(time => {
-        const split = time.split(" ");
-        const day = split[0];
-        const timetime = split.slice(1).join(" ");
-        return {
-            day,
-            time: timetime
+export function deduplicate<T>(array: T[], getKey: (item: T) => string | number) {
+    const seenItems: Record<string, boolean> = {};
+    return array.filter((item) => {
+        const key = getKey(item);
+        if (seenItems[key]) {
+            return false;
         }
+        seenItems[key] = true;
+        return true;
     });
+}
 
+export default function GroupCard(props: { group: Group, index: number }) {
     const tags = getTags(props.group.type);
 
     const register = useCallback(() => {
         GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id));
         alert("Вы зарегестрировались на " + props.group.name);
     }, [props.group.id]);
+
+    const formattedTime = deduplicate(props.group.time.flatMap(time => new Days(time).days), (item) => item.day);
 
     return <div className={styles.group_card}>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
@@ -137,13 +142,16 @@ export default function GroupCard(props: { group: Group, index: number }) {
         <div className={styles.date_place}>
             <Clock/>
             <div className={styles.dates}>
-                {split_time.map(({day, time}) =>
-                    <p key={day} className={styles.date}>
-                        <b>{day}</b>
-                        &nbsp;
-                        {time}
-                    </p>
-                )}
+                {
+                    formattedTime.map(time => time.toJSX())
+                }
+                {/*{split_time.map(({day, time}) =>*/}
+                {/*    <p key={day} className={styles.date}>*/}
+                {/*        <b>{day}</b>*/}
+                {/*        &nbsp;*/}
+                {/*        {time}*/}
+                {/*    </p>*/}
+                {/*)}*/}
             </div>
         </div>
         {props.group.metro !== "Онлайн" ?
