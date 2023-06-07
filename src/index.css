@@ -85,9 +85,8 @@ button:hover {
 }
 
 h3 {
-    color: var(--primary-green);
     font-weight: 700;
-    font-size: 24px;
+    font-size: 24px !important;
     line-height: 29px;
 }
 

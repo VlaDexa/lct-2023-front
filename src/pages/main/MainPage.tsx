@@ -67,12 +67,12 @@ function PageSwitcher(props: {
 }) {
     const nextButton = useMemo(() =>
         <button className={"btn btn_primary"} onClick={() => props.setPage(old => old + 1)}>
-            <h3 style={{margin: 0}}><b>Далее</b></h3>
+            <h3 style={{margin: 0}}>Далее</h3>
         </button>, [props.setPage]
     );
     const prevButton = useMemo(() =>
         <button className={"btn btn_primary"} onClick={() => props.setPage(old => old - 1)}>
-            <h3 style={{margin: 0}}><b>Назад</b></h3>
+            <h3 style={{margin: 0}}>Назад</h3>
         </button>, [props.setPage]
     );
 
