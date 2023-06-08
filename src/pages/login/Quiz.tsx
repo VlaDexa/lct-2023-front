@@ -109,7 +109,6 @@ export default function Quiz(props: {
 
     const goBack = useCallback(() => {
         setQuestion(old => old - 1);
-        console.log(question);
     }, [setQuestion, question])
 
     const questions = [

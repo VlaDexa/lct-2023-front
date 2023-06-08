@@ -52,9 +52,9 @@ export default function Profile(props: { login: LoginInfo }) {
         //     ]
         // )
     }, [])
-    console.log(groups);
+
     return <div className={styles.profile}>
-        <h1 className={styles.title_card}>{`Здраствуйте, ${props.login.name ?? "Зоя"} ${props.login.surname ?? "Николаевна"}`}</h1>
+        <h1 className={styles.title_card}>{`Здравствуйте, ${props.login.name ?? "Зоя"} ${props.login.surname ?? "Николаевна"}`}</h1>
 
         <center>
             <h2 className={styles.activity_title}>
