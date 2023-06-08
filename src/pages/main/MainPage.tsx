@@ -76,6 +76,14 @@ function PageSwitcher(props: {
         </button>, [props.setPage]
     );
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    }, [props.page])
+
     if (props.maxPages == 0) {
         return <></>
     } else if (props.page == 0) {
