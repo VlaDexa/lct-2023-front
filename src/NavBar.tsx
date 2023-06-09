@@ -3,6 +3,7 @@ import {ReactComponent as PersonActive} from "./assets/icons/person/active.svg";
 import {ReactComponent as HomeActive} from "./assets/icons/home/active.svg";
 import {ReactComponent as EyeActive} from "./assets/icons/eye/active.svg";
 import {FunctionComponent, KeyboardEvent, SVGProps, useCallback, useEffect, useState} from "react";
+import {ReactComponent as Exit} from "./assets/icons/exit.svg";
 import {Link} from "react-router-dom";
 
 export enum NavState {
@@ -32,7 +33,7 @@ function LogoAndText(props: {
     const Logo = props.activeSvg;
 
     return <div className={styles.logo_and_text} onClick={props.onClick} onKeyUp={onKeyUp} tabIndex={props.tabIndex}>
-        <Logo className={styles.logo} style={props.isActive ? undefined : {filter: "brightness(0)"}}/>
+        <Logo className={`${styles.logo} ${props.isActive ? "filter_to_primary_green" : undefined}`}/>
         <p className={props.isActive ? styles.active : undefined}>{props.children}</p>
     </div>
 }
@@ -93,6 +94,13 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
                 <LogoAndText activeSvg={PersonActive} isActive={navState === NavState.Profile}
                              onClick={setNavProfile}>Личный кабинет</LogoAndText>
             </Link>
+            <Vr/>
+            <button className={styles.exit_button} onClick={() => {
+                window.localStorage.clear();
+                window.location.reload();
+            }}>
+                <LogoAndText activeSvg={Exit}>Выход</LogoAndText>
+            </button>
             {/*<Vr/>*/}
             {/*<Link to={"/help"}>*/}
             {/*    <LogoAndText activeSvg={CommentSquareActive}*/}

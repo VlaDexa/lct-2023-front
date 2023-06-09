@@ -39,7 +39,7 @@
 }
 
 .logo_and_text .logo {
-
+    filter: brightness(0) saturate(100);
 }
 
 .logo_and_text:hover {
@@ -62,4 +62,9 @@
     display: flex;
     align-items: start;
     gap: 24px;
+}
+
+.exit_button {
+    background-color: transparent;
+    border: none;
 }
