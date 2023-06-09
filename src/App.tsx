@@ -28,7 +28,7 @@ export default function App() {
         address: string,
         activities: { name: string, value: number }[]
     ) {
-        UserService.updateUserApiV1UserUpdateUserPut({
+        await UserService.updateUserApiV1UserUpdateUserPut({
             address,
             sex: gender,
             survey_result: JSON.stringify(activities.map(el => el.value))
