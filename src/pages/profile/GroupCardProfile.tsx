@@ -3,18 +3,32 @@ import Clock from "../../assets/icons/clock.svg";
 import MapMarker from "../../assets/icons/map_marker.svg";
 import Metro from "../../assets/icons/metro.svg";
 import {PartialGroup} from "./Profile";
-import React from "react";
+import React, {useRef} from "react";
 import Days from "../../DateFormatter";
 import {deduplicate} from "../main/components/GroupCard";
+import {Dialog} from "../../Dialog";
 
 export default function GroupCardProfile(props: {
     group: PartialGroup,
     onUnsubscribe?: (event: React.MouseEvent<HTMLButtonElement>, group: PartialGroup) => void
 }) {
     const formattedTime = deduplicate(props.group.time.flatMap(time => new Days(time).days), (item) => item.day);
+    const registerDialog = useRef<HTMLDialogElement>(null)
 
     return (
         <div className={styles.card_outer}>
+            <Dialog dialogRef={registerDialog}>
+                <div className={styles.deny_dialog}>
+                    <h1 style={{color: "var(--primary-green)"}}>Вы уверены, что хотите отказаться от занятий?</h1>
+                    <button className={"btn btn_primary"} onClick={() => registerDialog.current!.close()}
+                            style={{marginTop: "20px"}}><b>Назад</b></button>
+                    <button className={"btn btn-secondary"} onClick={event => {
+                        props.onUnsubscribe && props.onUnsubscribe(event, props.group);
+                        registerDialog.current!.close();
+                    }}>Да
+                    </button>
+                </div>
+            </Dialog>
             <div className={styles.card_middle}>
                 <div className={styles.card}>
 
@@ -54,7 +68,7 @@ export default function GroupCardProfile(props: {
                     </div>
 
                     <button className={`btn btn-secondary ${styles.deny}`}
-                            onClick={event => props.onUnsubscribe && props.onUnsubscribe(event, props.group)}>
+                            onClick={() => registerDialog.current!.showModal()}>
                         <h4>
                             Отказаться от занятий
                         </h4>
