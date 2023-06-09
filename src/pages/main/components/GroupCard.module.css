@@ -37,7 +37,7 @@ body[data-blind="false"] .group_card {
 }
 
 .tag {
-    background-color: var(--mint);
+    background-color: rgba(151, 223, 191, 0.5);;
     border-radius: 10px;
     align-items: center;
     text-align: center;
@@ -46,13 +46,16 @@ body[data-blind="false"] .group_card {
     padding: 4px 12px;
 }
 
+body[data-blind="false"] .tag {
+    color: #008044;
+}
+
 .index {
-    background-color: var(--mint);
+    background-color: rgba(151, 223, 191, 0.5);;
     border-radius: 10px;
-    font-weight: 700;
     margin-left: 28px;
     width: max-content;
-    padding: 7px 16.5px;
+    padding: 5px 12px;
 }
 
 .address_place {

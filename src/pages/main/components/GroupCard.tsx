@@ -138,7 +138,8 @@ export default function GroupCard(props: { group: Group, index: number }) {
         <div className={styles.tag_line}>
             {tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
         </div>
-        <p className={styles.index}>№{props.index + 1} в вашем рейтинге</p>
+        <p className={styles.index}>Подобрано для вас</p>
+        {props.group.timeToWalk <= 20 ? <p className={styles.index}>недалеко от вас</p> : undefined}
         <div className={styles.date_place}>
             <Clock/>
             <div className={styles.dates}>
