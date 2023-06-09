@@ -11,7 +11,7 @@ import SportDedi from "/sport_dedi.png";
 import BoatBabushki from "/boat_babushki.png";
 import IntellectualTour from "/intellectual_tour.png";
 import Flower from "../../../assets/flower.svg"
-import React, {useCallback, useContext, useRef} from "react";
+import React, {useCallback, useContext, useRef, useState} from "react";
 import {ApiError, GroupsService} from "../../../openapi";
 import Days from "../../../DateFormatter";
 import {Dialog} from "../../../Dialog";
@@ -111,6 +111,7 @@ export type Group = {
     metro: string,
     timeToWalk: number,
     time: string[],
+    description: string,
 }
 
 export function deduplicate<T>(array: T[], getKey: (item: T) => string | number) {
@@ -127,6 +128,7 @@ export function deduplicate<T>(array: T[], getKey: (item: T) => string | number)
 
 export default function GroupCard(props: { group: Group, index: number }) {
     const tags = getTags(props.group.type);
+    const [isDescription, setDescription] = useState(false);
     const signDialog = useRef<HTMLDialogElement>(null);
     const register = useCallback(() => {
         signDialog.current!.showModal();
@@ -231,8 +233,14 @@ export default function GroupCard(props: { group: Group, index: number }) {
             </div>
         }
         <div className={styles.button_row}>
-            {/*<button className={styles.more_button}>Подробнее</button>*/}
+            <button className={styles.more_button} style={{backgroundColor: isDescription ? "var(--mint)" : undefined}}
+                    onClick={() => setDescription(old => !old)}>Подробнее
+            </button>
             <button className={styles.signup_button} onClick={register}>Записаться</button>
         </div>
+
+        {isDescription ?
+            <div className={styles.description_box}>{props.group.description}</div>
+            : undefined}
     </div>
 }

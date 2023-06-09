@@ -57,6 +57,7 @@ async function getGroups(loginInfo: LoginInfo): Promise<Group[]> {
             metro: group.metro!,
             timeToWalk: group.timeToWalk,
             id: group.id.toString(),
+            description: group.description,
             time: Array.isArray(group.time) ? group.time : group.time.split("; ")
         }
     });
