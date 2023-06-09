@@ -11,15 +11,6 @@ export default function GroupCardProfile(props: {
     group: PartialGroup,
     onUnsubscribe?: (event: React.MouseEvent<HTMLButtonElement>, group: PartialGroup) => void
 }) {
-    // const split_time = props.group.time.map(time => {
-    //     const split = time.split(" ");
-    //     const day = split[0];
-    //     const timetime = split.slice(1).join(" ");
-    //     return {
-    //         day,
-    //         time: timetime
-    //     }
-    // });
     const formattedTime = deduplicate(props.group.time.flatMap(time => new Days(time).days), (item) => item.day);
 
     return (
@@ -38,9 +29,11 @@ export default function GroupCardProfile(props: {
                             <img src={Clock} alt={""} className={"filter_to_primary_green"}
                                  style={{width: 17, height: 17}}/>
                             <ul className={styles.time_list}>
-                                {formattedTime.map(time => <li key={time.day}>
-                                    {time.toJSX()}
-                                </li>)}
+                                {formattedTime.map(time =>
+                                    <li key={time.day}>
+                                        <h4>{time.toJSX()}</h4>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                         <div className={styles.address_and_metro}>

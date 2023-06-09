@@ -21,7 +21,7 @@ enum Page {
 
 export default function App() {
     const [loginInfo, setLoginInfo] = useState(LoginInfo.loadFromLocal);
-    const [_, forceUpdate] = useReducer(x => x + 1, 0);
+    const [_, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
     async function sendQuiz(
         gender: string,

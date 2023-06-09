@@ -87,7 +87,7 @@ export default function Profile(props: { login: LoginInfo }) {
         <center>
             <Link to={"/"}>
                 <button className={"btn btn_primary"} style={{width: "100%"}}>
-                    <h2 style={{color: "var(--white)"}}>
+                    <h2 style={{color: "var(--white)", margin: "14px 0"}}>
                         Подобрать новые активности
                     </h2>
                 </button>

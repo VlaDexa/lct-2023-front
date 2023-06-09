@@ -143,7 +143,11 @@ export default function GroupCard(props: { group: Group, index: number }) {
             <Clock/>
             <div className={styles.dates}>
                 {
-                    formattedTime.map(time => <p key={time.day} className={styles.date}>{time.toJSX()}</p>)
+                    formattedTime.map(time =>
+                        <p key={time.day} className={styles.date}>
+                            {time.toJSX()}
+                        </p>
+                    )
                 }
                 {/*{split_time.map(({day, time}) =>*/}
                 {/*    <p key={day} className={styles.date}>*/}
