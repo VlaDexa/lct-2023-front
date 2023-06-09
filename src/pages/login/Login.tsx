@@ -78,6 +78,8 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         const yearN = Number(year);
         const dayN = Number(day);
         const monthN = months.get(month);
+        console.log(month);
+        console.log(monthN);
 
         if (surname === "") {
             setError("Вы пропустили пункт фамилия");
@@ -104,8 +106,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             setDateError("День не может быть меньше 0");
             return;
         } else if (monthN < dayN) {
-            const maxDay = months.get(month)!;
-            setDateError(`В месяце ${month} всего ${maxDay} дней`);
+            setDateError(`В месяце ${month} всего ${monthN} дней`);
             return;
         } else if (year === "") {
             setDateError("Вы пропустили пункт год")
@@ -115,7 +116,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             return;
         }
 
-        let i = 1;
+        let i = 0;
         for (const key_month of months.keys()) {
             if (key_month === month) break;
             i++;
@@ -124,7 +125,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         const date_of_birth = new Date();
         date_of_birth.setFullYear(
             yearN,
-            monthN,
+            i,
             dayN
         );
 
