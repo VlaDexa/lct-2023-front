@@ -38,8 +38,7 @@ function pageFilter(filters: Filters, groups: Group[]) {
 }
 
 async function getGroups(): Promise<Group[]> {
-    const is_old = await RecsService.isRecsExistApiV1RecsIsRecsExistGet();
-    const groups_nums: number[] = await RecsService.giveRecsApiV1RecsGet(!is_old)
+    const groups_nums: number[] = await RecsService.giveRecsApiV1RecsGet()
 
     const groups: Group[] = (
         await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums)
