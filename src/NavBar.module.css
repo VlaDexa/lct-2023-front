@@ -3,6 +3,7 @@
     align-self: stretch;
     width: 2px;
     height: 100%;
+    transform: scaleY(calc(32 / 24));
     margin-top: 7px;
     background-color: var(--text-inactive);
     margin-right: 15px;
