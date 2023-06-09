@@ -2,7 +2,7 @@
     display: inline-block;
     align-self: stretch;
     width: 2px;
-    height: 75%;
+    height: 100%;
     margin-top: 7px;
     background-color: var(--text-inactive);
     margin-right: 15px;
@@ -13,10 +13,13 @@
     display: flex;
     flex-flow: row;
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 15px 100px;
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav * {
+    margin: 0;
 }
 
 .logo_and_text {
@@ -58,4 +61,5 @@
 .align_start {
     display: flex;
     align-items: start;
+    gap: 24px;
 }
