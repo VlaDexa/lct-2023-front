@@ -17,7 +17,7 @@ export default function GroupCardProfile(props: {
 
     return (
         <div className={styles.card_outer}>
-            <Dialog dialogRef={registerDialog}>
+            <Dialog ref={registerDialog}>
                 <div className={styles.deny_dialog}>
                     <h1 style={{color: "var(--primary-green)"}}>Вы уверены, что хотите отказаться от занятий?</h1>
                     <button className={"btn btn_primary"} onClick={() => registerDialog.current!.close()}

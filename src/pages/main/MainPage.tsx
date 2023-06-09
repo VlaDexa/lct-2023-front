@@ -5,6 +5,7 @@ import HorizontalButtons, {SelectedGroupType} from "./components/HorizontalButto
 import GroupCard, {Group, GroupType} from "./components/GroupCard";
 import {ApiError, GroupsService, RecsService} from "../../openapi";
 import {LoginContext} from "../../AfterLogin";
+import LoginInfo from "../../LoginInfo";
 
 export type Filters = {
     type: SelectedGroupType,
@@ -37,11 +38,17 @@ function pageFilter(filters: Filters, groups: Group[]) {
     // return groups;
 }
 
-async function getGroups(): Promise<Group[]> {
-    const groups_nums: number[] = await RecsService.giveRecsApiV1RecsGet()
+async function getGroups(loginInfo: LoginInfo): Promise<Group[]> {
+    const groups_nums: number[] = await RecsService.giveRecsApiV1RecsGet().catch((error) => {
+        if (!(error instanceof ApiError && error.status === 401)) throw error;
+        return loginInfo.resetToken().then(() => RecsService.giveRecsApiV1RecsGet());
+    })
 
     const groups: Group[] = (
-        await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums)
+        await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums).catch((error) => {
+            if (!(error instanceof ApiError && error.status === 401)) throw error;
+            return loginInfo.resetToken().then(() => GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums));
+        })
     ).map(group => {
         return {
             type: group.type.toLowerCase() as GroupType,
@@ -123,9 +130,9 @@ export default function Main() {
     }, [selectedType, page])
 
     useEffect(() => {
-        getGroups().catch(error => {
+        getGroups(loginInfo).catch(error => {
             if (!(error instanceof ApiError && error.status === 401)) throw error
-            return loginInfo.resetToken().then(getGroups);
+            return loginInfo.resetToken().then(() => getGroups(loginInfo));
         }).then(setGroups);
     }, [loginInfo]);
 

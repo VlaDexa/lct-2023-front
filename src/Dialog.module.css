@@ -4,6 +4,8 @@
     left: 50%;
     margin: 0;
 
+    width: 803px;
+
     transform: translateX(-50%) translateY(-50%);
 
     z-index: 100;
@@ -24,7 +26,9 @@
     border: 2px solid #006739;
     border-radius: 10px;
 
-    padding: 40px 0;
+    padding: var(--inner_padding) 0;
+
+    --inner_padding: 40px;
 }
 
 .dialog::backdrop {

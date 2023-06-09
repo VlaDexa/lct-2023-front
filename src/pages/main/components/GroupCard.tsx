@@ -10,9 +10,12 @@ import CreativeBabushka from "/creative_babushka.png";
 import SportDedi from "/sport_dedi.png";
 import BoatBabushki from "/boat_babushki.png";
 import IntellectualTour from "/intellectual_tour.png";
-import {useCallback} from "react";
-import {GroupsService} from "../../../openapi";
+import Flower from "../../../assets/flower.svg"
+import React, {useCallback, useContext, useRef} from "react";
+import {ApiError, GroupsService} from "../../../openapi";
 import Days from "../../../DateFormatter";
+import {Dialog} from "../../../Dialog";
+import {LoginContext} from "../../../AfterLogin";
 
 export function SmallMapMarker(props: { aria_hidden?: boolean }) {
     return <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -124,25 +127,80 @@ export function deduplicate<T>(array: T[], getKey: (item: T) => string | number)
 
 export default function GroupCard(props: { group: Group, index: number }) {
     const tags = getTags(props.group.type);
-
+    const signDialog = useRef<HTMLDialogElement>(null);
     const register = useCallback(() => {
-        GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id));
-        alert("Вы зарегестрировались на " + props.group.name);
+        signDialog.current!.showModal();
+        // GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id));
+        // alert("Вы зарегестрировались на " + props.group.name);
     }, [props.group.id]);
+    const loginInfo = useContext(LoginContext);
 
     const formattedTime = deduplicate(props.group.time.flatMap(time => new Days(time).days), (item) => item.day);
 
-    return <div className={styles.group_card}>
+    return <div className={styles.group_card} aria-label={props.group.name}>
+        <Dialog ref={signDialog} className={styles.signDialog}>
+            <img src={Flower} alt={""} className={styles.signFlower}></img>
+            <div>
+                <h1 className={styles.signTitle}>Мы успешно записали вас на {props.group.name}</h1>
+                <div className={styles.date_place} style={{textAlign: "left", marginLeft: "100px"}}>
+                    <Clock/>
+                    <div className={styles.dates} aria-label={"Даты проведения"}>
+                        {
+                            formattedTime.map(time =>
+                                <p key={time.day} className={styles.date}>
+                                    {time.toJSX()}
+                                </p>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+            {props.group.metro !== "Онлайн" ?
+                <div className={styles.address_place} style={{marginLeft: "100px", marginBottom: "24px"}}>
+                    <div className={styles.address_string}>
+                        <SmallMapMarker/>
+                        <p>{props.group.address}</p>
+                    </div>
+                    <div className={styles.metro_string}>
+                        <MetroMarker/>
+                        <p>{props.group.metro}</p>
+                        <p> &#9679;</p>
+                        <p>{props.group.timeToWalk} минут пешком</p>
+                    </div>
+                </div> :
+                <div className={styles.address_place}>
+                    <div className={styles.address_string}>
+                        <SmallMapMarker/>
+                        <span>{props.group.metro}</span>
+                    </div>
+                </div>
+            }
+            <button className={`btn btn_primary ${styles.signButton}`} onClick={() => {
+                GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id)).catch(
+                    (error) => {
+                        if (!(error instanceof ApiError && error.status === 401)) throw error;
+
+                        return loginInfo.resetToken().then(() => GroupsService.createAttendApiV1GroupsAttendsPost(Number(props.group.id)));
+                    }
+                );
+                signDialog.current!.close()
+            }}
+                    style={{marginTop: "20px"}}><b>Готово</b></button>
+            <button className={`btn btn-secondary ${styles.signButton}`} onClick={event => {
+                signDialog.current!.close();
+            }}>Отменить запись
+            </button>
+        </Dialog>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
         <h3 className={styles.title}>{props.group.name}</h3>
         <div className={styles.tag_line}>
-            {tags.map(tag => <div key={tag} className={styles.tag}>{tag}</div>)}
+            {tags.map(tag => <span key={tag} className={styles.tag}>{tag}</span>)}
         </div>
         <p className={styles.index}>Подобрано для вас</p>
         {props.group.timeToWalk <= 20 ? <p className={styles.index}>недалеко от вас</p> : undefined}
         <div className={styles.date_place}>
             <Clock/>
-            <div className={styles.dates}>
+            <div className={styles.dates} aria-label={"Даты проведения"}>
                 {
                     formattedTime.map(time =>
                         <p key={time.day} className={styles.date}>
@@ -150,13 +208,6 @@ export default function GroupCard(props: { group: Group, index: number }) {
                         </p>
                     )
                 }
-                {/*{split_time.map(({day, time}) =>*/}
-                {/*    <p key={day} className={styles.date}>*/}
-                {/*        <b>{day}</b>*/}
-                {/*        &nbsp;*/}
-                {/*        {time}*/}
-                {/*    </p>*/}
-                {/*)}*/}
             </div>
         </div>
         {props.group.metro !== "Онлайн" ?

@@ -148,3 +148,29 @@ body[data-blind="false"] .tag {
 .button_row > button:hover {
     text-decoration: underline;
 }
+
+.signDialog {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.signFlower {
+    position: absolute;
+    --size: 100px;
+    right: calc(var(--size) / 2 * -1 + 15px);
+    top: calc(var(--size) / 2 * -1 + 12px);
+    /*transform: rotate(20.01deg);*/
+}
+
+.signTitle {
+    color: var(--primary-green);
+    margin-top: 0;
+    margin-bottom: 36px;
+}
+
+.signButton {
+    margin-top: 12px !important;
+    padding: 11px 0;
+}

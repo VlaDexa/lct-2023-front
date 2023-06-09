@@ -66,7 +66,10 @@ export default function Profile(props: { login: LoginInfo }) {
             {
                 groups.map(group =>
                     <GroupCardProfile key={group.id} group={group} onUnsubscribe={() => {
-                        GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id);
+                        GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id).catch((error) => {
+                            if (!(error instanceof ApiError && error.status === 401)) throw error;
+                            return loginInfo.resetToken().then(() => GroupsService.deleteAttendsApiV1GroupsAttendsIdDelete(group.id));
+                        });
                         setGroups((old) => {
                             let i = 0;
 
