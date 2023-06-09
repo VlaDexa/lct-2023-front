@@ -149,7 +149,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             "Authorization": `Bearer ${maybeSignedIn}`
         }
 
-        const exists = await RecsService.isExistRecsApiV1RecsIsExistGet();
+        const exists = await RecsService.isRecsExistApiV1RecsIsRecsExistGet();
 
         setUser(() => {
             return new LoginInfo(
