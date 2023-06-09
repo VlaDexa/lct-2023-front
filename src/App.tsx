@@ -13,12 +13,6 @@ function needsQuiz(info: LoginInfo): boolean {
     return info.needsQuiz;
 }
 
-enum Page {
-    Login,
-    Quiz,
-    Other
-}
-
 export default function App() {
     const [loginInfo, setLoginInfo] = useState(LoginInfo.loadFromLocal);
     const [_, forceUpdate] = useReducer((x: number) => x + 1, 0);
