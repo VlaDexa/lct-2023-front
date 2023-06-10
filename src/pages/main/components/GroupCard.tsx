@@ -199,8 +199,10 @@ export default function GroupCard(props: { group: Group, index: number }) {
         <div className={styles.tag_line}>
             {tags.map(tag => <span key={tag} className={styles.tag}>{tag}</span>)}
         </div>
-        <p className={styles.index}>Подобрано для вас</p>
-        {props.group.timeToWalk <= 20 ? <p className={styles.index}>недалеко от вас</p> : undefined}
+        <div className={styles.flair_tags}>
+            <p className={styles.index}>Подобрано для вас</p>
+            {props.group.timeToWalk <= 20 ? <p className={styles.index}>недалеко от вас</p> : undefined}
+        </div>
         <div className={styles.date_place}>
             <Clock/>
             <div className={styles.dates} aria-label={"Даты проведения"}>

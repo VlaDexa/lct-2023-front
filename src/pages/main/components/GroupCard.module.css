@@ -53,9 +53,9 @@ body[data-blind="false"] .tag {
 .index {
     background-color: rgba(151, 223, 191, 0.5);;
     border-radius: 10px;
-    margin-left: 28px;
     width: max-content;
     padding: 5px 12px;
+    margin: 0;
 }
 
 .address_place {
@@ -207,6 +207,16 @@ body[data-blind="false"] .description_box {
     color: var(--placeholder-color);
 }
 
+.flair_tags {
+    margin-left: 28px;
+    margin-top: 8px;
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
 @media only screen and (max-width: 680px) {
     .tag_line {
         display: none;
@@ -223,5 +233,9 @@ body[data-blind="false"] .description_box {
 
     .metro_string p:last-of-type {
         grid-column: 1 / -1;
+    }
+
+    .flair_tags {
+        flex-direction: column;
     }
 }
