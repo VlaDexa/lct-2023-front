@@ -114,6 +114,12 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
         } else if (yearN > thisYear) {
             setDateError(`Вы не могли родиться после ${thisYear} года`)
             return;
+        } else if (yearN >= 1968) {
+            setDateError("Вы слишком молод для участия в московском долголетии");
+            return
+        } else if (yearN <= 1923) {
+            setDateError("Вы слишком стары для участия в московском долголетии");
+            return
         }
 
         let i = 0;
@@ -197,7 +203,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
                 <InputAndLabel label={"Месяц"} text={month} setText={setMonth} id={"month"} placeholder={"январь"}
                                required={true} type={"text"} list={"months"}/>
                 <InputAndLabel label={"Год"} text={year} setText={setYear} id={"year"} placeholder={"1950"}
-                               required={true} type={"number"} max={2023}/>
+                               required={true} type={"number"} min={1923} max={1968}/>
             </div>
 
             <p className={styles.error}>{dateError}</p>
