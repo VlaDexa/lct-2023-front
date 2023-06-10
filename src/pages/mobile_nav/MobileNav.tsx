@@ -36,7 +36,10 @@ export const MobileNav = forwardRef<HTMLDialogElement, {
             <hr/>
             <Link to={"/profile"} onClick={updateAndClose}><IconAndText icon={Person} isActive={location === "/profile"}>Профиль</IconAndText></Link>
             <hr/>
-            <button style={{backgroundColor: "transparent", border: "none"}}><IconAndText icon={Exit} isActive={false}>Выход</IconAndText></button>
+            <button style={{backgroundColor: "transparent", border: "none"}} onClick={() => {
+                window.localStorage.clear();
+                window.location.reload();
+            }}><IconAndText icon={Exit} isActive={false}>Выход</IconAndText></button>
             <hr/>
             <button onClick={() => {
                 updateAndClose();
