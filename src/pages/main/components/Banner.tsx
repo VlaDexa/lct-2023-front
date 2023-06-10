@@ -1,10 +1,11 @@
 import {ReactComponent as BannerThing} from "../../../assets/banner_thingy.svg"
 import NewStarperi from "/group_starperi.png";
 import styles from "./Banner.module.css"
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {Dialog} from "../../../Dialog";
+import SearchBar from "./SearchBar";
 
-export default function Banner() {
+export default function Banner(props: {setSearch: (newVal: string) => void}) {
     const howDoesItWork = useRef<HTMLDialogElement>(null);
 
     return <div className={[styles.banner, styles.flex_row].join(" ")}>
@@ -30,7 +31,7 @@ export default function Banner() {
             <button className={styles.how_does_it_work} onClick={() => howDoesItWork.current!.showModal()}>Как это
                 работает?
             </button>
-            {/*<SearchBar/>*/}
+            <SearchBar setSearch={props.setSearch}/>
         </div>
         <BannerThing className={styles.banner_decoration}/>
         <img className={styles.new_starperi} src={NewStarperi} alt={"Группа пожилых людей"}/>

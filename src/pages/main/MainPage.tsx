@@ -38,7 +38,28 @@ function pageFilter(filters: Filters, groups: Group[]) {
     // return groups;
 }
 
-async function getGroups(loginInfo: LoginInfo): Promise<Group[]> {
+async function getGroups(loginInfo: LoginInfo, query: string): Promise<Group[]> {
+    if (query !== "") {
+        const apiGroups = await GroupsService.getGroupApiV1GroupsGroupPost(query).catch((error) => {
+            if (!(error instanceof ApiError && error.status === 401)) throw error;
+
+            return loginInfo.resetToken().then(() => GroupsService.getGroupApiV1GroupsGroupPost(query));
+        });
+
+        return apiGroups.map(group => {
+            return {
+                type: group.type.toLowerCase() as GroupType,
+                name: group.name,
+                address: group.address,
+                metro: group.metro!,
+                timeToWalk: group.timeToWalk,
+                id: group.id.toString(),
+                description: group.description,
+                time: Array.isArray(group.time) ? group.time : group.time.split("; ")
+            }
+        })
+    }
+
     const groups_nums: number[] = await RecsService.giveRecsApiV1RecsGet().catch((error) => {
         if (!(error instanceof ApiError && error.status === 401)) throw error;
         return loginInfo.resetToken().then(() => RecsService.giveRecsApiV1RecsGet());
@@ -116,6 +137,7 @@ export default function Main() {
         recs: true,
         close: false
     });
+    const [search, setSearch] = useState("");
 
     const loginInfo = useContext(LoginContext);
 
@@ -130,18 +152,18 @@ export default function Main() {
     }, [selectedType, page])
 
     useEffect(() => {
-        getGroups(loginInfo).catch(error => {
+        getGroups(loginInfo, search).catch(error => {
             if (!(error instanceof ApiError && error.status === 401)) throw error
-            return loginInfo.resetToken().then(() => getGroups(loginInfo));
+            return loginInfo.resetToken().then(() => getGroups(loginInfo, search));
         }).then(setGroups);
-    }, [loginInfo]);
+    }, [loginInfo, search]);
 
     useEffect(() => {
         setShownGroups(pageFilter(filters, groups));
     }, [filters, groups])
 
     return <>
-        <Banner/>
+        <Banner setSearch={setSearch}/>
         <HorizontalButtons selectedType={selectedType} setSelectedType={setSelectedType}
                            className={styles.spacing_left} setFilters={setFilters} recs={true}/>
         <Groups groups={shownGroups}/>
