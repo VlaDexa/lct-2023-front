@@ -192,7 +192,7 @@ body[data-blind="false"] .active {
     border: 2px solid var(--primary-green);
     border-radius: 10px;
 
-    margin: 0 28px 18px;
+    margin: 0 28px 16px;
     padding: 16px 30px;
 }
 
