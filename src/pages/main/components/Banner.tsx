@@ -9,7 +9,7 @@ export default function Banner() {
 
     return <div className={[styles.banner, styles.flex_row].join(" ")}>
         <div className={[styles.banner_flavour_text].join(" ")}>
-            <h1 aria-label={"Эти мероприятия могут вас заинтересовать"}>
+            <h1 aria-label={"Эти мероприятия могут вас заинтересовать"} style={{marginBottom: 0}}>
                 <span style={{font: "inherit"}} aria-hidden={true}>Эти</span>
                 <span aria-hidden={true} className={styles.inverse_color_text_upper}>мероприятия</span>
                 <br aria-hidden={true}/>
