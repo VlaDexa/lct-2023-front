@@ -87,6 +87,7 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
     const helpDialog = useRef<HTMLDialogElement>(null);
 
     return <nav className={styles.nav}>
+        <button className={styles.menu} aria-label={"Меню"}/>
         <div className={styles.align_start}>
             <Link to={"/"}><LogoAndText activeSvg={HomeActive}
                                         isActive={navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText></Link>

@@ -105,3 +105,45 @@
 
     margin-top: 32px;
 }
+
+@media only screen and (max-width: 960px) {
+    .nav {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+.menu {
+    display: none;
+}
+
+.actual_menu {
+    display: none;
+}
+
+@media only screen and (max-width: 860px) {
+    .nav * {
+        display: none;
+    }
+
+    .nav {
+        flex-direction: row-reverse;
+    }
+
+    .menu {
+        display: block;
+        height: 32px;
+        width: 36px;
+
+        background-image: url("./assets/icons/menu.svg");
+
+        background-color: transparent;
+        border: none;
+
+        align-self: end;
+    }
+
+    .menu img {
+        width: 32px;
+    }
+}
