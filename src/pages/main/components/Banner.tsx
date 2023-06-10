@@ -14,6 +14,7 @@ export default function Banner() {
                 <span aria-hidden={true} className={styles.inverse_color_text_upper}>мероприятия</span>
                 <br aria-hidden={true}/>
                 <span style={{font: "inherit"}} aria-hidden={true}>могут Вас</span>
+                <br className={styles.second_br}/>
                 <span aria-hidden={true} className={styles.inverse_color_text_lower}>заинтересовать!</span>
             </h1>
             <Dialog ref={howDoesItWork} className={styles.how_does_it_work_dialog}>

@@ -145,3 +145,37 @@
     padding: 15px 24px;
     gap: 10px;
 }
+
+.second_br {
+    display: none;
+}
+
+@media only screen and (max-width: 680px) {
+    .new_starperi {
+        display: none;
+    }
+
+    .inverse_color_text_upper {
+        border-radius: 10px;
+        padding: 0;
+    }
+
+    .inverse_color_text_lower {
+        border-radius: 10px;
+        padding: 0;
+    }
+
+    .second_br {
+        display: initial;
+    }
+
+    .banner {
+        padding-left: 20px;
+    }
+
+    .banner_flavour_text h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+    }
+}

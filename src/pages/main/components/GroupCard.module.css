@@ -206,3 +206,22 @@ body[data-blind="false"] .description_box {
     margin-left: 28px;
     color: var(--placeholder-color);
 }
+
+@media only screen and (max-width: 680px) {
+    .tag_line {
+        display: none;
+    }
+
+    .metro_string {
+        display: grid;
+        grid-template-columns: 23px 1fr;
+    }
+
+    .metro_string p:nth-of-type(2) {
+        display: none;
+    }
+
+    .metro_string p:last-of-type {
+        grid-column: 1 / -1;
+    }
+}
