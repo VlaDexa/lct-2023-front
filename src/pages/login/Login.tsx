@@ -115,7 +115,7 @@ export default function Login({setUser}: { setUser: React.Dispatch<React.SetStat
             setDateError(`Вы не могли родиться после ${thisYear} года`)
             return;
         } else if (yearN >= 1968) {
-            setDateError("Вы слишком молод для участия в московском долголетии");
+            setDateError("Вы слишком молоды для участия в московском долголетии");
             return
         } else if (yearN <= 1923) {
             setDateError("Вы слишком стары для участия в московском долголетии");
