@@ -201,7 +201,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
         </div>
         <div className={styles.flair_tags}>
             <p className={styles.index}>Подобрано для вас</p>
-            {props.group.timeToWalk <= 20 ? <p className={styles.index}>недалеко от вас</p> : undefined}
+            {props.group.timeToWalk <= 20 && props.group.metro !== "Онлайн" ? <p className={styles.index}>недалеко от вас</p> : undefined}
         </div>
         <div className={styles.date_place}>
             <Clock/>
