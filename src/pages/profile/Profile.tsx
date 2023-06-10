@@ -22,7 +22,8 @@ export default function Profile(props: { login: LoginInfo }) {
 
     useEffect(() => {
         GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet().catch((error) => {
-            if (!(error instanceof ApiError && error.status === 401)) throw error;
+            if (!(error instanceof ApiError && (error.status === 401 || error.status === 404))) throw error;
+            if (error.status === 404) return [];
 
             return loginInfo.resetToken().then(GroupsService.getAttendsByIdApiV1GroupsAttendsUserGet);
         }).then((groups): PartialGroup[] => {
@@ -62,7 +63,7 @@ export default function Profile(props: { login: LoginInfo }) {
             </h2>
         </center>
 
-        <span className={styles.groups}>
+        {groups.length !== 0 ? <span className={styles.groups}>
             {
                 groups.map(group =>
                     <GroupCardProfile key={group.id} group={group} onUnsubscribe={() => {
@@ -85,7 +86,7 @@ export default function Profile(props: { login: LoginInfo }) {
                     }}/>
                 )
             }
-        </span>
+        </span> : <center style={{marginBottom: "24px"}}><b>У вас пока нет активностей</b></center>}
 
         <center>
             <Link to={"/"}>
