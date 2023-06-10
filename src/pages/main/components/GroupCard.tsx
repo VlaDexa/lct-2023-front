@@ -194,6 +194,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
             </button>
         </Dialog>
         <img src={chooseYourBabushka(props.group.type)} className={styles.preview} alt={""}/>
+        <span className={styles.id}>ID: {props.group.id}</span>
         <h3 className={styles.title}>{props.group.name}</h3>
         <div className={styles.tag_line}>
             {tags.map(tag => <span key={tag} className={styles.tag}>{tag}</span>)}
