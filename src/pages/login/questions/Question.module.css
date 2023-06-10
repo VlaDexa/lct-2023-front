@@ -66,8 +66,13 @@
     border-radius: 10px;
 }
 
-.next:disabled {
+body[data-blind="true"] .next:disabled {
     background-color: transparent;
+    color: var(--button-primary-bg-color);
+}
+
+body[data-blind="false"] .next:disabled {
+    background-color: #F6F6F6;
     color: var(--button-primary-bg-color);
 }
 
@@ -115,4 +120,19 @@
 .table_cell {
     text-align: center;
     vertical-align: middle;
+}
+
+@media only screen and (max-width: 470px) {
+    .border_around_card {
+        border: none;
+        width: unset !important;
+    }
+
+    .title {
+        margin: 0 27px;
+    }
+
+    .button_row {
+        margin: 32px 27px;
+    }
 }

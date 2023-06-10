@@ -10,7 +10,7 @@ export const FieldSetQuestionElement: QuestionElement<string, FieldSetQuestionEl
     return (
         <fieldset className={props.className}>
             {props.options.map((option) => (
-                <label key={option} style={{display: "flex", flexDirection: "row"}}>
+                <label key={option} style={{display: "flex", flexDirection: "row", gap: "8px"}}>
                     <input type="radio" name={props.answerName} value={option}
                            className={["checkbox_like_radio", styles.input].join(" ")}
                            onChange={() => props.setShouldUnblock(true)}

@@ -61,3 +61,14 @@
 .table_question {
     margin: 32px 76px 0;
 }
+
+@media screen and (max-width: 460px) {
+    .quiz_page {
+        display: flex;
+        justify-content: unset;
+    }
+
+    .input_question {
+        margin: 27px 32px 0;
+    }
+}

@@ -49,3 +49,10 @@
 .button:hover {
     background-color: var(--secondary-green);
 }
+
+@media only screen and (max-width: 460px) {
+    .suggestion {
+        margin: 0 27px 0;
+    }
+
+}

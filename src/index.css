@@ -122,17 +122,22 @@ b {
 }
 
 .checkbox_like_radio {
-    appearance: none;
+    /*appearance: none;*/
 
-    border: 2px solid var(--text-active);
-    border-radius: 20px;
-    background-image: url("/check.svg");
-    background-color: var(--white);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    /*border: 2px solid var(--text-active);*/
+    /*border-radius: 20px;*/
+    /*background-image: url("/check.svg");*/
+    /*background-color: var(--white);*/
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
 
     transition: background-color 200ms linear;
+    appearance: none;
+    background-color: white;
+    box-shadow: 0 0 0 2px var(--text-active);
+    border: 5px solid white;
+    border-radius: 20px;
 }
 
 .checkbox_like_radio:checked {
