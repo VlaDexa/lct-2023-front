@@ -8,6 +8,7 @@ import {ReactComponent as Exit} from "./assets/icons/exit.svg";
 import Close from "./assets/icons/close.svg";
 import {Link} from "react-router-dom";
 import {Dialog} from "./Dialog";
+import {MobileNav} from "./pages/mobile_nav/MobileNav";
 
 export enum NavState {
     Main,
@@ -56,8 +57,6 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
                 return NavState.Main;
             case "/profile":
                 return NavState.Profile;
-            case "/help":
-                return NavState.Help;
             default:
                 return NavState.Other;
         }
@@ -85,9 +84,25 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
     }, [props.setForBlind, props.forBlind]);
 
     const helpDialog = useRef<HTMLDialogElement>(null);
+    const mobileNav = useRef<HTMLDialogElement>(null);
 
-    return <nav className={styles.nav}>
-        <button className={styles.menu} aria-label={"Меню"}/>
+    return <>
+        <MobileNav ref={mobileNav} close={() => mobileNav.current!.close()} onHelp={() => helpDialog.current!.showModal()} onBlind={() => setForBlind()}/>
+            <Dialog ref={helpDialog} className={styles.help_dialog}>
+                <button className={styles.close} onClick={() => helpDialog.current!.close()}><img src={Close}
+                                                                                                  alt={"Закрыть"}/>
+                </button>
+                <h1>Как подбираются рекомендации?</h1>
+                <p>
+                    Мы создали алгоритм, который подбирает мероприятия, <b>наиболее подходящие для Вас.</b>
+                    <br/>
+                    Он учитывает ваши предпочтения в занятиях, то, как долго Вам нужно будет добираться до места
+                    проведения мероприятий, а также данные общей статистики.
+                    Надеемся, что наша работа помогла найти Вам <b>лучшую программу!</b>
+                </p>
+            </Dialog>
+        <nav className={styles.nav}>
+        <button className={styles.menu} aria-label={"Меню"} onClick={() => mobileNav.current!.showModal()}/>
         <div className={styles.align_start}>
             <Link to={"/"}><LogoAndText activeSvg={HomeActive}
                                         isActive={navState === NavState.Main} onClick={setNavMain}>Главная</LogoAndText></Link>
@@ -104,19 +119,6 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
                 <LogoAndText activeSvg={Exit}>Выход</LogoAndText>
             </button>
             <Vr/>
-            <Dialog ref={helpDialog} className={styles.help_dialog}>
-                <button className={styles.close} onClick={() => helpDialog.current!.close()}><img src={Close}
-                                                                                                  alt={"Закрыть"}/>
-                </button>
-                <h1>Как подбираются рекомендации?</h1>
-                <p>
-                    Мы создали алгоритм, который подбирает мероприятия, <b>наиболее подходящие для Вас.</b>
-                    <br/>
-                    Он учитывает ваши предпочтения в занятиях, то, как долго Вам нужно будет добираться до места
-                    проведения мероприятий, а также данные общей статистики.
-                    Надеемся, что наша работа помогла найти Вам <b>лучшую программу!</b>
-                </p>
-            </Dialog>
             <button className={styles.help_button}>
                 <LogoAndText activeSvg={CommentSquareActive}
                              onClick={() => helpDialog.current!.showModal()}>Помощь</LogoAndText>
@@ -129,4 +131,5 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
             {/*<FontSizeChanger makeItLarger={null!} makeItSmaller={null!}/>*/}
         </div>
     </nav>
+    </>
 }
