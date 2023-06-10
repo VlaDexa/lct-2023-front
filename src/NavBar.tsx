@@ -2,9 +2,12 @@ import styles from "./NavBar.module.css";
 import {ReactComponent as PersonActive} from "./assets/icons/person/active.svg";
 import {ReactComponent as HomeActive} from "./assets/icons/home/active.svg";
 import {ReactComponent as EyeActive} from "./assets/icons/eye/active.svg";
-import {FunctionComponent, KeyboardEvent, SVGProps, useCallback, useEffect, useState} from "react";
+import {ReactComponent as CommentSquareActive} from "./assets/icons/comment_square/active.svg";
+import {FunctionComponent, KeyboardEvent, SVGProps, useCallback, useEffect, useRef, useState} from "react";
 import {ReactComponent as Exit} from "./assets/icons/exit.svg";
+import Close from "./assets/icons/close.svg";
 import {Link} from "react-router-dom";
+import {Dialog} from "./Dialog";
 
 export enum NavState {
     Main,
@@ -85,6 +88,8 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
         document.body.attributes.setNamedItem(blind_attr);
     }, [props.setForBlind, props.forBlind]);
 
+    const helpDialog = useRef<HTMLDialogElement>(null);
+
     return <nav className={styles.nav}>
         <div className={styles.align_start}>
             <Link to={"/"}><LogoAndText activeSvg={HomeActive}
@@ -101,11 +106,24 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
             }}>
                 <LogoAndText activeSvg={Exit}>Выход</LogoAndText>
             </button>
-            {/*<Vr/>*/}
-            {/*<Link to={"/help"}>*/}
-            {/*    <LogoAndText activeSvg={CommentSquareActive}*/}
-            {/*                 isActive={navState === NavState.Help} onClick={setNavHelp}>Помощь</LogoAndText>*/}
-            {/*</Link>*/}
+            <Vr/>
+            <Dialog ref={helpDialog} className={styles.help_dialog}>
+                <button className={styles.close} onClick={() => helpDialog.current!.close()}><img src={Close}
+                                                                                                  alt={"Закрыть"}/>
+                </button>
+                <h1>Как подбираются рекомендации?</h1>
+                <p>
+                    Мы создали алгоритм, который подбирает мероприятия, <b>наиболее подходящие для Вас.</b>
+                    <br/>
+                    Он учитывает ваши предпочтения в занятиях, то, как долго Вам нужно будет добираться до места
+                    проведения мероприятий, а также данные общей статистики.
+                    Надеемся, что наша работа помогла найти Вам <b>лучшую программу!</b>
+                </p>
+            </Dialog>
+            <button className={styles.help_button}>
+                <LogoAndText activeSvg={CommentSquareActive}
+                             onClick={() => helpDialog.current!.showModal()}>Помощь</LogoAndText>
+            </button>
         </div>
         <div className={styles.align_end}>
             <LogoAndText activeSvg={EyeActive} isActive={props.forBlind} onClick={setForBlind}

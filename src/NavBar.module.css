@@ -69,3 +69,39 @@
     background-color: transparent;
     border: none;
 }
+
+.help_button {
+    background-color: transparent;
+    border: none;
+}
+
+.help_dialog {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.help_dialog .close {
+    position: absolute;
+    right: -24px;
+    top: -24px;
+
+    background-color: transparent;
+    border: none;
+
+    margin: 0;
+}
+
+.help_dialog h1 {
+    color: var(--primary-green);
+    margin: 0;
+}
+
+.help_dialog p {
+    text-align: left;
+    padding: 0 50px;
+
+    margin-top: 32px;
+}
