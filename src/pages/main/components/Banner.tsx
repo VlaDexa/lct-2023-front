@@ -1,7 +1,7 @@
 import {ReactComponent as BannerThing} from "../../../assets/banner_thingy.svg"
 import NewStarperi from "/group_starperi.png";
 import styles from "./Banner.module.css"
-import {useRef, useState} from "react";
+import {useRef} from "react";
 import {Dialog} from "../../../Dialog";
 import SearchBar from "./SearchBar";
 
