@@ -108,3 +108,41 @@
 
     width: calc(100% - 64px * 2);
 }
+
+@media only screen and (max-width: 680px) {
+    .input_row:first-of-type {
+        grid-template-columns: unset;
+        grid-template-rows: repeat(3, 1fr);
+
+        align-self: center;
+    }
+
+    .input_row:first-of-type .input {
+        text-align: start;
+
+        align-items: unset;
+    }
+
+    .input_row:last-of-type {
+        row-gap: 12px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .input_row:last-of-type .input:nth-of-type(2) > input {
+        width: 98px;
+    }
+
+    .input > input {
+        text-align: unset;
+        padding: 10px 0 10px 16px;
+
+        width: min-content;
+    }
+
+    .title {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+    }
+}
