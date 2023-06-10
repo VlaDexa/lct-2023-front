@@ -188,7 +188,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
                 signDialog.current!.close()
             }}
                     style={{marginTop: "20px"}}><b>Готово</b></button>
-            <button className={`btn btn-secondary ${styles.signButton}`} onClick={event => {
+            <button className={`btn btn-secondary ${styles.signButton}`} onClick={() => {
                 signDialog.current!.close();
             }}>Отменить запись
             </button>

@@ -44,7 +44,7 @@ async function getGroups(loginInfo: LoginInfo): Promise<Group[]> {
         return loginInfo.resetToken().then(() => RecsService.giveRecsApiV1RecsGet());
     })
 
-    const groups: Group[] = (
+    return (
         await GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums).catch((error) => {
             if (!(error instanceof ApiError && error.status === 401)) throw error;
             return loginInfo.resetToken().then(() => GroupsService.readGroupApiV1GroupsGroupsPost(groups_nums));
@@ -61,7 +61,6 @@ async function getGroups(loginInfo: LoginInfo): Promise<Group[]> {
             time: Array.isArray(group.time) ? group.time : group.time.split("; ")
         }
     });
-    return groups;
 }
 
 function PageSwitcher(props: {

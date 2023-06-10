@@ -1,5 +1,4 @@
 import {OpenAPI, UserService} from "./openapi";
-import {Simulate} from "react-dom/test-utils";
 
 export default class LoginInfo {
     // @ts-ignore: Set via setter

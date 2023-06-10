@@ -77,10 +77,6 @@ export default function NavBar(props: { forBlind: boolean, setForBlind: (blind: 
         setNavState(NavState.Profile);
     }, [setNavState]);
 
-    const setNavHelp = useCallback(() => {
-        setNavState(NavState.Help);
-    }, [setNavState]);
-
     const setForBlind = useCallback(() => {
         props.setForBlind(!props.forBlind);
         const blind_attr = document.body.attributes.getNamedItem("data-blind")!;
