@@ -133,6 +133,18 @@ body[data-blind="false"] .tag {
     height: 48px;
 }
 
+body[data-blind="false"] .more_button {
+    border: none;
+}
+
+body[data-blind="true"] .active {
+    background-color: var(--mint);
+}
+
+body[data-blind="false"] .active {
+    background-color: #CAEEDE;
+}
+
 .signup_button {
     border-radius: 10px;
     border: 0;
@@ -182,4 +194,9 @@ body[data-blind="false"] .tag {
 
     margin: 0 28px 18px;
     padding: 16px 30px;
+}
+
+body[data-blind="false"] .description_box {
+    border: none;
+    background: #CAEEDE;
 }

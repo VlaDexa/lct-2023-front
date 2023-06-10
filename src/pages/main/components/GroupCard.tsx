@@ -233,7 +233,7 @@ export default function GroupCard(props: { group: Group, index: number }) {
             </div>
         }
         <div className={styles.button_row}>
-            <button className={styles.more_button} style={{backgroundColor: isDescription ? "var(--mint)" : undefined}}
+            <button className={`${styles.more_button} ${isDescription ? styles.active : undefined}`}
                     onClick={() => setDescription(old => !old)}>Подробнее
             </button>
             <button className={styles.signup_button} onClick={register}>Записаться</button>
