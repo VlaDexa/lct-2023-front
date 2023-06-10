@@ -85,11 +85,45 @@
     }
 
     .footer {
+        padding: 24px 108px;
         grid-template-columns: unset;
         grid-template-areas:
         "a b"
         "c c";
         row-gap: 0;
-        column-gap: 80px;
+        column-gap: 0;
+    }
+}
+
+@media only screen and (max-width: 910px) {
+    .logo {
+        display: none;
+    }
+
+    .link_to_social p {
+        display: none;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 20px;
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+
+        align-self: start;
+    }
+
+    .contacts ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contacts b {
+        display: initial;
     }
 }
