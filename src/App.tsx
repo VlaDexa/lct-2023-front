@@ -4,7 +4,6 @@ import AfterLogin from "./AfterLogin";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Main from "./pages/main/MainPage";
 import Profile from "./pages/profile/Profile";
-import Help from "./pages/help/Help";
 import Quiz from "./pages/login/Quiz";
 import LoginInfo from "./LoginInfo";
 import {UserService} from "./openapi";
@@ -42,7 +41,6 @@ export default function App() {
                         <Route path={"/"} element={<AfterLogin user={loginInfo}/>}>
                             <Route index element={<Main/>}/>
                             <Route path={"profile"} element={<Profile login={loginInfo}/>}/>
-                            <Route path={"help"} element={<Help/>}/>
                         </Route>
                     </Routes>
                 </BrowserRouter>);
