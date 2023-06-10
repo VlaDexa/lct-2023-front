@@ -68,3 +68,28 @@
 .contacts > ul > li > a {
     color: inherit;
 }
+
+@media only screen and (max-width: 1100px) {
+    .contacts b {
+        display: none;
+    }
+
+    .contacts {
+        display: block;
+        grid-column: 1 / -1;
+    }
+
+    .contacts ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer {
+        grid-template-columns: unset;
+        grid-template-areas:
+        "a b"
+        "c c";
+        row-gap: 0;
+        column-gap: 80px;
+    }
+}
